@@ -15,7 +15,8 @@ export default function Home() {
   return (
     <>
       <SplashScreen />
-      <div className="bg-black text-white min-h-screen">
+      {/* Wrapper landing-theme para aislar estilos oscuros sin afectar Intranet */}
+      <div className="landing-theme min-h-screen">
         <Navbar />
         <main>
           <Hero />
