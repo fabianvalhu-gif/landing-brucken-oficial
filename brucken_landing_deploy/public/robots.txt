@@ -1,0 +1,11 @@
+# www.robotstxt.org/
+# Permite a todos los motores de búsqueda acceder a todo el contenido
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.bruckenglobal.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 0
