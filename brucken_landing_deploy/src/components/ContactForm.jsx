@@ -44,7 +44,7 @@ export default function ContactForm() {
     return newErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const validation = validate();
     if (Object.keys(validation).length) {
@@ -52,11 +52,25 @@ export default function ContactForm() {
       return;
     }
 
-    setStatus("sending");
-    setTimeout(() => {
+    try {
+      setStatus("sending");
+      const res = await fetch("/api/submit-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: "Error desconocido" }));
+        throw new Error(err.error || "No se pudo enviar el formulario");
+      }
+
       setStatus("success");
       setFormData(initialForm);
-    }, 1200);
+    } catch (e) {
+      setStatus("idle");
+      setErrors((prev) => ({ ...prev, submit: e.message }));
+    }
   };
 
   return (
@@ -142,6 +156,9 @@ export default function ContactForm() {
           >
             {status === "sending" ? "Enviando..." : "Enviar mensaje"}
           </button>
+          {errors.submit && (
+            <p className="text-sm text-red-400 text-center">{errors.submit}</p>
+          )}
           {status === "success" && (
             <p className="text-sm text-green-400 text-center">
               Gracias por contactarnos. Te responderemos en breve.
