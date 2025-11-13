@@ -251,8 +251,8 @@ export default function Companies() {
 
   return (
     <IntranetLayout>
-      {/* Hero + KPIs */}
-      <div className="grid gap-6 lg:grid-cols-[2.2fr,1fr] mb-10">
+  {/* Hero + KPIs */}
+  <div className="grid gap-6 md:grid-cols-[2fr,1fr] lg:grid-cols-[2.2fr,1fr] mb-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -457,7 +457,7 @@ export default function Companies() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              className="bg-white rounded-2xl p-6 sm:p-8 max-w-full sm:max-w-xl md:max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             >
               <h2 className="text-2xl font-bold mb-6 text-gray-900">
                 {editingCompany ? "Editar Empresa" : "Nueva Empresa"}
@@ -485,7 +485,7 @@ export default function Companies() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Razón Social
@@ -512,7 +512,7 @@ export default function Companies() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Industria
@@ -579,7 +579,7 @@ export default function Companies() {
                   </h3>
                   
                   <div className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Sitio Web
@@ -677,7 +677,7 @@ export default function Companies() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Ciudad
@@ -736,7 +736,7 @@ export default function Companies() {
                     <span>📊</span> Información Empresarial
                   </h3>
                   
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Número de Empleados

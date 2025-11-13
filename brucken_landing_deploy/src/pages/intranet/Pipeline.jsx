@@ -253,8 +253,8 @@ export default function Pipeline() {
 
   return (
     <IntranetLayout>
-      {/* Hero */}
-      <div className="grid gap-6 lg:grid-cols-[2.2fr,1fr] mb-10">
+  {/* Hero */}
+  <div className="grid gap-6 md:grid-cols-[2fr,1fr] lg:grid-cols-[2.2fr,1fr] mb-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="stat-card">
           <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">Pipeline</p>
           <h1 className="text-4xl font-semibold text-petrol mt-3 mb-4 leading-tight">
@@ -303,7 +303,7 @@ export default function Pipeline() {
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
       >
-        <div className="flex gap-4 overflow-x-auto pb-4">
+  <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory">
           {stages.map((stage) => {
             const stageDeals = getDealsByStage(stage.id);
             const stageTotal = getStageTotal(stage.id);
@@ -354,7 +354,7 @@ export default function Pipeline() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              className="bg-white rounded-2xl p-6 sm:p-8 max-w-full sm:max-w-xl md:max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             >
               <h2 className="text-2xl font-bold mb-6 text-gray-900 flex items-center gap-2">
                 <span>🎯</span> Nueva Oportunidad de Negocio

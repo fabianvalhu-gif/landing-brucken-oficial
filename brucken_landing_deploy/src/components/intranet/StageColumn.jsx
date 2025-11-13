@@ -8,7 +8,7 @@ export default function StageColumn({ stage, deals, total }) {
   });
 
   return (
-    <div className="flex-shrink-0 w-80">
+  <div className="flex-shrink-0 min-w-[260px] w-72 md:w-80">
       {/* Stage Header */}
       <div className="glass-card p-5 mb-3">
         <div className="flex items-center justify-between mb-2">

@@ -387,8 +387,8 @@ const categoryOptions = [
 
   return (
     <IntranetLayout>
-      {/* Hero */}
-      <div className="grid gap-6 lg:grid-cols-[2.2fr,1fr] mb-8">
+  {/* Hero */}
+  <div className="grid gap-6 md:grid-cols-[2fr,1fr] lg:grid-cols-[2.2fr,1fr] mb-8">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="stat-card">
           <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">Boards cliente</p>
           <h1 className="text-3xl font-semibold text-petrol mt-3 mb-3">
@@ -483,12 +483,12 @@ const categoryOptions = [
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
       >
-        <div className="flex gap-6 overflow-x-auto pb-6">
+  <div className="flex gap-6 overflow-x-auto pb-6 -mx-2 px-2 snap-x snap-mandatory">
           {columns.map((column) => {
             const columnTasks = getTasksByColumn(column.id);
             
             return (
-              <div key={column.id} className="flex-shrink-0 w-80">
+              <div key={column.id} className="flex-shrink-0 min-w-[250px] w-72 md:w-80">
                 <div className="glass-card p-5 mb-3">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -569,7 +569,7 @@ const categoryOptions = [
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              className="bg-white rounded-2xl p-6 sm:p-8 max-w-full sm:max-w-xl md:max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             >
               <h2 className="text-2xl font-bold mb-6 text-gray-900">
                 {editingTask ? "Editar Tarea" : "Nueva Tarea"}

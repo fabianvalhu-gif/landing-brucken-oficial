@@ -50,21 +50,21 @@ export default function DealCard({ deal, isDragging = false }) {
       style={style}
       {...attributes}
       {...listeners}
-      className={`rounded-2xl p-4 cursor-grab active:cursor-grabbing transition-all group bg-white shadow-soft border border-transparent ${
+      className={`rounded-2xl p-3 sm:p-4 cursor-grab active:cursor-grabbing transition-all group bg-white shadow-soft border border-transparent ${
         isDragging ? "shadow-glow scale-105 border-electric" : "hover:border-electric/40"
       }`}
     >
       {/* Deal Title */}
-      <h3 className="font-semibold text-petrol mb-2 group-hover:text-electric transition-colors">
+      <h3 className="font-semibold text-petrol mb-2 group-hover:text-electric transition-colors text-sm sm:text-base truncate">
         {deal.title}
       </h3>
 
       {/* Company/Contact */}
       <div className="flex items-center gap-2 mb-3">
         {deal.company && (
-          <div className="flex items-center gap-2 text-sm text-neutral-500">
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-neutral-500 truncate">
             <span className="text-lg">🏢</span>
-            <span>{deal.company.name}</span>
+            <span className="truncate max-w-[120px] sm:max-w-[160px]">{deal.company.name}</span>
           </div>
         )}
         {deal.contact && (

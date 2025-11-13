@@ -110,7 +110,7 @@ export default function IntranetLayout({ children }) {
 
         {/* Content */}
         <div className="flex-1 flex flex-col">
-          <header className="px-6 lg:px-12 py-6 border-b border-neutral-200 bg-white/70 backdrop-blur-lg sticky top-0 z-40">
+          <header className="px-4 sm:px-6 lg:px-12 py-5 border-b border-neutral-200 bg-white/70 backdrop-blur-lg sticky top-0 z-40">
             <div className="flex flex-col gap-6">
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div>
@@ -143,7 +143,7 @@ export default function IntranetLayout({ children }) {
             </div>
           </header>
 
-          <main className="flex-1 px-4 sm:px-6 lg:px-12 py-8">
+          <main className="flex-1 px-3 sm:px-6 lg:px-12 py-6 sm:py-8">
             {children}
           </main>
         </div>
