@@ -66,7 +66,7 @@ export default function Companies() {
     const payload = {
       company_id: companyRecord.id,
       first_name: firstName || "Contacto",
-      last_name,
+      last_name: lastName,
       email: formData.primary_contact_email || companyRecord.email || null,
       phone: formData.primary_contact_phone || companyRecord.phone || null,
       position: "Contacto Principal",
