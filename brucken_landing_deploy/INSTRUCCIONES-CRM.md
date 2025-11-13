@@ -123,12 +123,25 @@ git push
 
 Vercel detectará los cambios y desplegará automáticamente.
 
-**IMPORTANTE:** Asegúrate de agregar las variables de entorno en Vercel:
+**IMPORTANTE:** Asegúrate de agregar las variables de entorno en Vercel (Frontend + API):
 1. Ve a: https://vercel.com/dashboard
 2. Proyecto → Settings → Environment Variables
-3. Agrega:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
+3. Agrega (Environment = Production y Preview):
+   - Frontend (para el build y el cliente):
+     - `VITE_SUPABASE_URL` = https://<your-project-id>.supabase.co
+     - `VITE_SUPABASE_ANON_KEY` = <tu anon key>
+   - Servidor (para las funciones /api/*):
+     - `SUPABASE_URL` = https://<your-project-id>.supabase.co
+     - `SUPABASE_SERVICE_ROLE_KEY` = <tu service_role key> (SECRETO, no exponer en frontend)
+
+4. Project → Settings → General
+   - Root Directory: `brucken_landing_deploy`
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+
+5. Revisar Deployments: que el último deploy corresponda al commit actual en `main`.
+
+6. Revisar Domains: que tu dominio esté asignado a este proyecto. Si no ves cambios, usa “Redeploy” con “Invalidate cache”.
 
 ---
 
@@ -155,7 +168,7 @@ src/
     └── supabase.js ✅
 
 supabase-schema.sql ✅ (BASE DE DATOS - EJECUTAR EN SUPABASE)
-.env.local ✅ (Credenciales configuradas)
+.env.local ✅ (Credenciales configuradas para local)
 ```
 
 ---
