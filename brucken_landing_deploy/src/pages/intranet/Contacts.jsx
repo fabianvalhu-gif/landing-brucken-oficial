@@ -108,6 +108,8 @@ export default function Contacts() {
     try {
       const dataToSave = {
         ...formData,
+        // Sanitizar UUID vacío para evitar error "invalid input syntax for type uuid: \"\""
+        company_id: formData.company_id ? formData.company_id : null,
         birth_date: formData.birth_date || null, // Convertir string vacío a null
         languages: formData.languages ? formData.languages.split(',').map(l => l.trim()).filter(l => l) : [],
         interests: formData.interests ? formData.interests.split(',').map(i => i.trim()).filter(i => i) : [],
