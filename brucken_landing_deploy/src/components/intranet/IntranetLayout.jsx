@@ -7,6 +7,8 @@ import "../../styles/intranet-light.css";
 export default function IntranetLayout({ children }) {
   const [user, setUser] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState(false);
+  const [expandedGroups, setExpandedGroups] = useState({ ventas: true, relaciones: true, insights: false });
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,14 +26,33 @@ export default function IntranetLayout({ children }) {
     navigate("/login");
   };
 
-  const navItems = [
-    { name: "Dashboard", path: "/intranet", icon: "🏠" },
-    { name: "Pipeline", path: "/intranet/pipeline", icon: "📈" },
-    { name: "Boards", path: "/intranet/boards", icon: "🗂️" },
-    { name: "Contactos", path: "/intranet/contacts", icon: "👥" },
-    { name: "Empresas", path: "/intranet/companies", icon: "🏢" },
-    { name: "Actividades", path: "/intranet/activities", icon: "🗓️" },
-    { name: "Analytics", path: "/intranet/analytics", icon: "📊" },
+  const navGroups = [
+    {
+      id: "ventas",
+      label: "Ventas",
+      items: [
+        { name: "Pipeline", path: "/intranet/pipeline", icon: "📈" },
+        { name: "Boards", path: "/intranet/boards", icon: "🗂️" },
+        { name: "Leads", path: "/intranet/leads", icon: "🧲" },
+      ],
+    },
+    {
+      id: "relaciones",
+      label: "Relaciones",
+      items: [
+        { name: "Contactos", path: "/intranet/contacts", icon: "👥" },
+        { name: "Empresas", path: "/intranet/companies", icon: "🏢" },
+      ],
+    },
+    {
+      id: "insights",
+      label: "Insights",
+      items: [
+        { name: "Dashboard", path: "/intranet", icon: "🏠" },
+        { name: "Actividades", path: "/intranet/activities", icon: "🗓️" },
+        { name: "Analytics", path: "/intranet/analytics", icon: "📊" },
+      ],
+    },
   ];
 
   const isActive = (path) => {
@@ -45,25 +66,60 @@ export default function IntranetLayout({ children }) {
     <div className="crm-shell">
       <div className="min-h-screen flex">
         {/* Sidebar */}
-        <aside className="hidden lg:flex flex-col w-24 bg-white/80 backdrop-blur-xl border-r border-neutral-200 items-center py-8 space-y-6">
-          <Link to="/" className="w-12 h-12 rounded-2xl bg-petrol text-white flex items-center justify-center font-semibold shadow-glow">
-            B
-          </Link>
-          <div className="flex flex-col gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`sidebar-pill ${isActive(item.path) ? "bg-electric text-white shadow-glow" : "text-neutral-400"}`}
-                title={item.name}
-              >
-                <span className="text-xl">{item.icon}</span>
-              </Link>
-            ))}
+        <aside className={`hidden lg:flex flex-col ${sidebarExpanded ? "w-72" : "w-24"} transition-all duration-300 bg-white/80 backdrop-blur-xl border-r border-neutral-200 py-6`}>
+          <div className="px-4 flex items-center justify-between">
+            <Link to="/" className="w-12 h-12 rounded-2xl bg-petrol text-white flex items-center justify-center font-semibold shadow-glow">
+              B
+            </Link>
+            <button
+              onClick={() => setSidebarExpanded((v) => !v)}
+              className="ml-2 p-2 rounded-xl bg-white shadow-soft text-neutral-600 hidden lg:inline-flex"
+              aria-label="Toggle sidebar"
+            >
+              {sidebarExpanded ? "«" : "»"}
+            </button>
           </div>
+
+          <nav className="mt-6 flex-1 overflow-y-auto">
+            <div className="px-3 space-y-3">
+              {navGroups.map((group) => (
+                <div key={group.id} className="">
+                  <button
+                    onClick={() => setExpandedGroups((g) => ({ ...g, [group.id]: !g[group.id] }))}
+                    className={`w-full flex items-center ${sidebarExpanded ? "justify-between" : "justify-center"} gap-2 px-3 py-2 rounded-xl text-sm font-semibold text-neutral-500 hover:bg-white`}
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="text-neutral-400">▸</span>
+                      {sidebarExpanded && group.label}
+                    </span>
+                    {sidebarExpanded && (
+                      <span className="text-xs text-neutral-400">{expandedGroups[group.id] ? "Ocultar" : "Mostrar"}</span>
+                    )}
+                  </button>
+
+                  <div className={`${expandedGroups[group.id] ? "grid" : "hidden"} mt-1 gap-1`}> 
+                    {group.items.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className={`flex items-center ${sidebarExpanded ? "justify-start gap-3 px-3 py-2" : "justify-center p-3"} rounded-xl font-semibold transition-colors ${
+                          isActive(item.path) ? "bg-electric text-white shadow-glow" : "text-neutral-500 hover:bg-white"
+                        }`}
+                        title={item.name}
+                      >
+                        <span className="text-lg">{item.icon}</span>
+                        {sidebarExpanded && <span className="text-sm">{item.name}</span>}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </nav>
+
           <button
             onClick={handleLogout}
-            className="mt-auto text-xs text-neutral-500 hover:text-petrol transition-colors"
+            className={`mx-4 mt-auto mb-2 ${sidebarExpanded ? "px-4 py-2" : "p-2"} rounded-xl bg-white shadow-soft text-neutral-600 text-sm hover:text-petrol`}
           >
             Cerrar sesión
           </button>
@@ -91,7 +147,7 @@ export default function IntranetLayout({ children }) {
               animate={{ height: "auto", opacity: 1 }}
               className="px-4 pb-4 grid gap-2"
             >
-              {navItems.map((item) => (
+              {navGroups.flatMap((g) => g.items).map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}

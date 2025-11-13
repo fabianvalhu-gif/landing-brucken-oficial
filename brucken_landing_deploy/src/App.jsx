@@ -8,6 +8,7 @@ import Contacts from "./pages/intranet/Contacts";
 import Companies from "./pages/intranet/Companies";
 import Activities from "./pages/intranet/Activities";
 import Analytics from "./pages/intranet/Analytics";
+import Leads from "./pages/intranet/Leads";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -72,6 +73,14 @@ export default function App() {
           element={
             <ProtectedRoute>
               <Analytics />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/intranet/leads"
+          element={
+            <ProtectedRoute>
+              <Leads />
             </ProtectedRoute>
           }
         />
