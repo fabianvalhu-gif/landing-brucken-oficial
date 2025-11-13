@@ -1,0 +1,10 @@
+{
+  "name": "brucken-landing-workspace",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix brucken_landing_deploy",
+    "build": "npm run build --prefix brucken_landing_deploy",
+    "preview": "npm run preview --prefix brucken_landing_deploy",
+    "install:app": "npm install --prefix brucken_landing_deploy"
+  }
+}
