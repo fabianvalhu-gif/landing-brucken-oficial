@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import IntranetLayout from "../../components/intranet/IntranetLayout";
+import PageHeader from "../../components/intranet/PageHeader";
 import { supabase } from "../../lib/supabase";
 
 export default function Leads() {
@@ -127,90 +128,111 @@ export default function Leads() {
 
   return (
     <IntranetLayout>
-      <div className="p-4 sm:p-6 lg:p-8">
-        <div className="mb-6 grid gap-3 sm:flex sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-petrol">Leads del formulario</h1>
-            <p className="text-neutral-500 text-sm">Registros creados desde el sitio (tag: landing). Edita datos y crea oportunidades.</p>
-          </div>
-          <div className="flex gap-2">
+      <div className="space-y-6">
+        <PageHeader
+          title="Leads del sitio"
+          subtitle="Registros creados desde el sitio (tag: landing). Edita datos y crea oportunidades."
+          badge="Leads"
+          meta={[
+            { label: "Total", value: leads.length, icon: "🧲" },
+            { label: "Con oportunidad", value: leads.filter((l) => l.hasDeal).length, icon: "✅" },
+          ]}
+          actions={[
+            {
+              label: "Ver pipeline",
+              to: "/intranet/pipeline",
+              icon: "📈",
+            },
+          ]}
+        />
+
+        <div className="crm-card p-4 sm:p-5">
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2">
+              <span className="crm-tag bg-electric/10 text-electric border-electric/30">
+                {filtered.length} visibles
+              </span>
+              <span className="text-xs text-neutral-500">
+                Actualiza correo, teléfono, empresa o crea oportunidad.
+              </span>
+            </div>
             <input
               type="text"
               placeholder="Buscar lead..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="text-sm w-64 bg-white border border-neutral-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-electric/40"
+              className="text-sm w-full sm:w-64 bg-white border border-neutral-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-electric/40"
             />
           </div>
-        </div>
 
-        <div className="overflow-x-auto">
-          <div className="min-w-[800px] bg-white rounded-2xl shadow-soft border border-neutral-100">
-            <div className="grid grid-cols-12 px-4 py-3 text-xs font-semibold text-neutral-500 border-b">
-              <div className="col-span-2">Fecha</div>
-              <div className="col-span-2">Nombre</div>
-              <div className="col-span-2">Email</div>
-              <div className="col-span-2">Teléfono</div>
-              <div className="col-span-2">Empresa</div>
-              <div className="col-span-2 text-right">Acciones</div>
-            </div>
-            {loading ? (
-              <div className="p-6 text-sm text-neutral-500">Cargando...</div>
-            ) : filtered.length === 0 ? (
-              <div className="p-6 text-sm text-neutral-500">No hay leads</div>
-            ) : (
-              filtered.map((l) => (
-                <div key={l.id} className="grid grid-cols-12 items-center px-4 py-3 border-b last:border-b-0">
-                  <div className="col-span-2 text-sm text-neutral-500">{new Date(l.created_at).toLocaleString()}</div>
-                  <div className="col-span-2 font-medium">{l.first_name} {l.last_name}</div>
-                  <div className="col-span-2">
-                    <input
-                      className="text-sm w-full bg-white border border-neutral-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-electric/40"
-                      value={l.email || ""}
-                      onChange={(e) => setLeads((prev) => prev.map((x) => (x.id === l.id ? { ...x, email: e.target.value } : x)))}
-                      onBlur={() => updateContact(l.id, { email: l.email || null })}
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <input
-                      className="text-sm w-full bg-white border border-neutral-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-electric/40"
-                      value={l.phone || ""}
-                      onChange={(e) => setLeads((prev) => prev.map((x) => (x.id === l.id ? { ...x, phone: e.target.value } : x)))}
-                      onBlur={() => updateContact(l.id, { phone: l.phone || null })}
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <select
-                      className="text-sm w-full bg-white border border-neutral-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-electric/40"
-                      value={l.company_id || ""}
-                      onChange={(e) => {
-                        const val = e.target.value || null;
-                        setLeads((prev) => prev.map((x) => (x.id === l.id ? { ...x, company_id: val, company_name: companyLabel(val) } : x)));
-                        updateContact(l.id, { company_id: val });
-                      }}
-                    >
-                      <option value="">— Sin empresa —</option>
-                      {companies.map((c) => (
-                        <option key={c.id} value={c.id}>{c.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="col-span-2 flex justify-end gap-2">
-                    {l.hasDeal ? (
-                      <span className="px-3 py-1 rounded-full text-xs bg-green-50 text-green-700 border border-green-200">Con oportunidad</span>
-                    ) : (
-                      <button
-                        className="btn-primary text-xs px-3 py-1"
-                        disabled={savingId === l.id}
-                        onClick={() => createDeal(l)}
+          <div className="overflow-x-auto">
+            <div className="min-w-[860px]">
+              <div className="grid grid-cols-12 px-4 py-3 text-xs font-semibold text-neutral-500 border-b">
+                <div className="col-span-2">Fecha</div>
+                <div className="col-span-2">Nombre</div>
+                <div className="col-span-2">Email</div>
+                <div className="col-span-2">Teléfono</div>
+                <div className="col-span-2">Empresa</div>
+                <div className="col-span-2 text-right">Acciones</div>
+              </div>
+              {loading ? (
+                <div className="p-6 text-sm text-neutral-500">Cargando...</div>
+              ) : filtered.length === 0 ? (
+                <div className="p-6 text-sm text-neutral-500">No hay leads</div>
+              ) : (
+                filtered.map((l) => (
+                  <div key={l.id} className="grid grid-cols-12 items-center px-4 py-3 border-b last:border-b-0">
+                    <div className="col-span-2 text-sm text-neutral-500">{new Date(l.created_at).toLocaleString()}</div>
+                    <div className="col-span-2 font-medium">{l.first_name} {l.last_name}</div>
+                    <div className="col-span-2">
+                      <input
+                        className="text-sm w-full bg-white border border-neutral-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-electric/40"
+                        value={l.email || ""}
+                        onChange={(e) => setLeads((prev) => prev.map((x) => (x.id === l.id ? { ...x, email: e.target.value } : x)))}
+                        onBlur={() => updateContact(l.id, { email: l.email || null })}
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <input
+                        className="text-sm w-full bg-white border border-neutral-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-electric/40"
+                        value={l.phone || ""}
+                        onChange={(e) => setLeads((prev) => prev.map((x) => (x.id === l.id ? { ...x, phone: e.target.value } : x)))}
+                        onBlur={() => updateContact(l.id, { phone: l.phone || null })}
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <select
+                        className="text-sm w-full bg-white border border-neutral-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-electric/40"
+                        value={l.company_id || ""}
+                        onChange={(e) => {
+                          const val = e.target.value || null;
+                          setLeads((prev) => prev.map((x) => (x.id === l.id ? { ...x, company_id: val, company_name: companyLabel(val) } : x)));
+                          updateContact(l.id, { company_id: val });
+                        }}
                       >
-                        {savingId === l.id ? "Creando..." : "Crear oportunidad"}
-                      </button>
-                    )}
+                        <option value="">— Sin empresa —</option>
+                        {companies.map((c) => (
+                          <option key={c.id} value={c.id}>{c.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-span-2 flex justify-end gap-2">
+                      {l.hasDeal ? (
+                        <span className="px-3 py-1 rounded-full text-xs bg-green-50 text-green-700 border border-green-200">Con oportunidad</span>
+                      ) : (
+                        <button
+                          className="btn-primary text-xs px-3 py-1"
+                          disabled={savingId === l.id}
+                          onClick={() => createDeal(l)}
+                        >
+                          {savingId === l.id ? "Creando..." : "Crear oportunidad"}
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))
-            )}
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>

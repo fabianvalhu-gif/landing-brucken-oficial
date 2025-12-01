@@ -14,6 +14,7 @@ import { supabase } from "../../lib/supabase";
 import IntranetLayout from "../../components/intranet/IntranetLayout";
 import DealCard from "../../components/intranet/DealCard";
 import StageColumn from "../../components/intranet/StageColumn";
+import PageHeader from "../../components/intranet/PageHeader";
 
 const labelOptions = [
   { id: "prioridad", label: "Prioridad", color: "bg-red-100 text-red-600" },
@@ -253,90 +254,79 @@ export default function Pipeline() {
 
   return (
     <IntranetLayout>
-  {/* Hero */}
-  <div className="grid gap-6 md:grid-cols-[2fr,1fr] lg:grid-cols-[2.2fr,1fr] mb-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="stat-card">
-          <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">Pipeline</p>
-          <h1 className="text-4xl font-semibold text-petrol mt-3 mb-4 leading-tight">
-            Visualiza etapas, revenue y prioridades como una boutique de consultoría.
-          </h1>
-          <p className="text-neutral-500 mb-6">
-            Arrastra deals, etiqueta iniciativas y mantén al equipo alineado con la mirada de Brucken AG Global.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <button onClick={() => setShowNewDealModal(true)} className="cta-button cta-button-primary text-sm">
-              + Nueva Oportunidad
-            </button>
-            <button onClick={() => navigate("/intranet/boards")} className="cta-button cta-button-outline text-sm">
-              Ir a tareas por cliente
-            </button>
+      <PageHeader
+        title="Pipeline de ventas"
+        subtitle="Visualiza etapas, revenue y prioridades; arrastra oportunidades entre columnas."
+        badge="Ventas"
+        meta={heroStats.map((s) => ({ ...s, icon: "📌" }))}
+        actions={[
+          { label: "Nueva oportunidad", onClick: () => setShowNewDealModal(true), icon: "➕", variant: "primary" },
+          { label: "Boards por cliente", to: "/intranet/boards", icon: "🗂️" },
+        ]}
+      />
+
+      <div className="space-y-6">
+        <div className="crm-card p-5 lg:p-6 flex flex-wrap items-center gap-3">
+          <span className="crm-tag bg-electric/10 text-electric border-electric/20">
+            {deals.length} oportunidades activas
+          </span>
+          <div className="flex gap-2 flex-wrap">
+            {stages.map((stage) => (
+              <span
+                key={stage.id}
+                className="crm-tag bg-white/70 border-neutral-200 text-neutral-700"
+              >
+                {stage.name}
+              </span>
+            ))}
           </div>
-        </motion.div>
-        <div className="grid gap-4">
-          {heroStats.map((stat) => (
-            <div key={stat.label} className="glass-card p-5">
-              <p className="text-sm text-neutral-500 mb-1">{stat.label}</p>
-              <p className="text-2xl font-semibold text-petrol">{stat.value}</p>
+        </div>
+
+        {/* Pipeline Kanban */}
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCorners}
+          onDragStart={handleDragStart}
+          onDragOver={handleDragOver}
+          onDragEnd={handleDragEnd}
+        >
+          <div className="crm-card p-3 lg:p-4">
+            <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory">
+              {stages.map((stage) => {
+                const stageDeals = getDealsByStage(stage.id);
+                const stageTotal = getStageTotal(stage.id);
+
+                return (
+                  <StageColumn
+                    key={stage.id}
+                    stage={stage}
+                    deals={stageDeals}
+                    total={stageTotal}
+                  />
+                );
+              })}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      <div className="flex flex-wrap gap-3 mb-8">
-        <div className="px-4 py-2 rounded-full bg-white shadow-soft border border-neutral-200 text-sm text-neutral-600">
-          {deals.length} oportunidades activas
-        </div>
-        <div className="flex gap-2 flex-wrap">
-          {stages.map((stage) => (
-            <span key={stage.id} className="px-4 py-2 rounded-full bg-neutral-100 text-neutral-500 text-sm font-semibold">
-              {stage.name}
-            </span>
-          ))}
-        </div>
-      </div>
+          <DragOverlay>
+            {activeId && activeDeal ? <DealCard deal={activeDeal} isDragging /> : null}
+          </DragOverlay>
+        </DndContext>
 
-      {/* Pipeline Kanban */}
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCorners}
-        onDragStart={handleDragStart}
-        onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
-      >
-  <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory">
-          {stages.map((stage) => {
+        {/* Stats Footer */}
+        <div className="crm-card p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {stages.slice(0, 4).map((stage) => {
             const stageDeals = getDealsByStage(stage.id);
             const stageTotal = getStageTotal(stage.id);
-
             return (
-              <StageColumn
-                key={stage.id}
-                stage={stage}
-                deals={stageDeals}
-                total={stageTotal}
-              />
+              <div key={stage.id} className="bg-white rounded-2xl shadow-soft border border-neutral-100 p-4">
+                <p className="text-sm text-neutral-500 mb-1">{stage.name}</p>
+                <p className="text-2xl font-bold text-petrol">{stageDeals.length}</p>
+                <p className="text-sm text-electric font-semibold">${stageTotal.toLocaleString()}</p>
+              </div>
             );
           })}
         </div>
-
-        <DragOverlay>
-          {activeId && activeDeal ? <DealCard deal={activeDeal} isDragging /> : null}
-        </DragOverlay>
-      </DndContext>
-
-      {/* Stats Footer */}
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {stages.slice(0, 4).map((stage) => {
-          const stageDeals = getDealsByStage(stage.id);
-          const stageTotal = getStageTotal(stage.id);
-          return (
-            <div key={stage.id} className="glass-card p-5">
-              <p className="text-sm text-neutral-500 mb-1">{stage.name}</p>
-              <p className="text-2xl font-bold text-petrol">{stageDeals.length}</p>
-              <p className="text-sm text-electric font-semibold">${stageTotal.toLocaleString()}</p>
-            </div>
-          );
-        })}
       </div>
 
       {/* Modal Nueva Oportunidad */}

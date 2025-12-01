@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../../lib/supabase";
 import IntranetLayout from "../../components/intranet/IntranetLayout";
+import PageHeader from "../../components/intranet/PageHeader";
 import {
   DndContext,
   DragOverlay,
@@ -387,153 +388,152 @@ const categoryOptions = [
 
   return (
     <IntranetLayout>
-  {/* Hero */}
-  <div className="grid gap-6 md:grid-cols-[2fr,1fr] lg:grid-cols-[2.2fr,1fr] mb-8">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="stat-card">
-          <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">Boards cliente</p>
-          <h1 className="text-3xl font-semibold text-petrol mt-3 mb-3">
-            {selectedBoard?.name || "Tablero consultoría"}
-          </h1>
-          <p className="text-neutral-500 mb-6">
-            {selectedBoard?.description || "Coordina tareas y minutas por cliente, sincronizado con pipeline y squads de proyecto."}
-          </p>
-          <button
-            onClick={() => handleAddTask("todo")}
-            className="cta-button cta-button-primary text-sm"
-          >
-            + Nueva tarea o minuta
-          </button>
-        </motion.div>
-        <div className="grid gap-4">
-          {[
-            { label: "Tareas activas", value: totalTasks },
-            { label: "Minutas registradas", value: minutesCount },
-            { label: "Clientes con seguimiento", value: clientsTracked },
-          ].map((stat) => (
-            <div key={stat.label} className="glass-card p-5">
-              <p className="text-sm text-neutral-500 mb-1">{stat.label}</p>
-              <p className="text-2xl font-semibold text-petrol">{stat.value}</p>
+      <PageHeader
+        title={selectedBoard?.name || "Boards por cliente"}
+        subtitle={
+          selectedBoard?.description ||
+          "Coordina tareas, minutas y seguimiento por cliente, alineado al pipeline."
+        }
+        badge="Operaciones"
+        meta={[
+          { label: "Tareas activas", value: totalTasks, icon: "✅" },
+          { label: "Minutas", value: minutesCount, icon: "📝" },
+          { label: "Clientes con seguimiento", value: clientsTracked, icon: "🏢" },
+        ]}
+        actions={[
+          { label: "Nueva tarea o minuta", onClick: () => handleAddTask("todo"), icon: "➕", variant: "primary" },
+          boards.length > 1
+            ? { label: "Ver pipeline", to: "/intranet/pipeline", icon: "📈" }
+            : null,
+        ].filter(Boolean)}
+      />
+
+      <div className="space-y-6">
+        {boards.length > 1 && (
+          <div className="crm-card p-4 flex gap-2 overflow-x-auto">
+            {boards.map((board) => (
+              <button
+                key={board.id}
+                onClick={() => setSelectedBoard(board)}
+                className={`crm-tag ${selectedBoard?.id === board.id ? "bg-electric/10 border-electric/30 text-electric" : "bg-white/70"}`}
+              >
+                {board.name}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="crm-card p-4 space-y-3">
+          <div className="flex flex-wrap gap-3 items-center">
+            <span className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+              Clientes
+            </span>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setCompanyFilter("all")}
+                className={`crm-tag ${companyFilter === "all" ? "bg-electric/10 border-electric/30 text-electric" : "bg-white/70"}`}
+              >
+                Todos
+              </button>
+              {companies.map((company) => (
+                <button
+                  key={company.id}
+                  onClick={() => setCompanyFilter(company.id)}
+                  className={`crm-tag ${companyFilter === company.id ? "bg-electric/10 border-electric/30 text-electric" : "bg-white/70"}`}
+                >
+                  {company.name}
+                </button>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {boards.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto pb-4">
-          {boards.map((board) => (
-            <button
-              key={board.id}
-              onClick={() => setSelectedBoard(board)}
-              className={`px-4 py-2 rounded-full font-semibold whitespace-nowrap transition-all ${
-                selectedBoard?.id === board.id
-                  ? "bg-electric text-white shadow-soft"
-                  : "bg-white text-neutral-500 border border-neutral-200 hover:text-petrol"
-              }`}
-            >
-              {board.name}
-            </button>
-          ))}
-        </div>
-      )}
+          <div className="crm-divider" />
 
-      <div className="flex flex-wrap gap-3 mb-8 items-center">
-        <div className="flex flex-wrap gap-2">
-          <span className="text-xs uppercase tracking-[0.3em] text-neutral-400 pr-2">Clientes</span>
-          <button
-            onClick={() => setCompanyFilter("all")}
-            className={`pill-filter ${companyFilter === "all" ? "pill-filter-active" : ""}`}
-          >
-            Todos
-          </button>
-          {companies.map((company) => (
-            <button
-              key={company.id}
-              onClick={() => setCompanyFilter(company.id)}
-              className={`pill-filter ${companyFilter === company.id ? "pill-filter-active" : ""}`}
-            >
-              {company.name}
-            </button>
-          ))}
+          <div className="flex flex-wrap gap-3 items-center">
+            <span className="text-xs uppercase tracking-[0.3em] text-neutral-500">
+              Tipo
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {categoryOptions.map((option) => (
+                <button
+                  key={option.id}
+                  onClick={() => setCategoryFilter(option.id)}
+                  className={`crm-tag ${categoryFilter === option.id ? "bg-electric/10 border-electric/30 text-electric" : "bg-white/70"}`}
+                >
+                  {option.label}
+                </button>
+              ))}
+              <button
+                onClick={() => setCategoryFilter("all")}
+                className={`crm-tag ${categoryFilter === "all" ? "bg-electric/10 border-electric/30 text-electric" : "bg-white/70"}`}
+              >
+                Todos
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <span className="text-xs uppercase tracking-[0.3em] text-neutral-400 pr-2">Tipo</span>
-          {categoryOptions.map((option) => (
-            <button
-              key={option.id}
-              onClick={() => setCategoryFilter(option.id)}
-              className={`pill-filter ${categoryFilter === option.id ? "pill-filter-active" : ""}`}
-            >
-              {option.label}
-            </button>
-          ))}
-          <button
-            onClick={() => setCategoryFilter("all")}
-            className={`pill-filter ${categoryFilter === "all" ? "pill-filter-active" : ""}`}
-          >
-            Todos
-          </button>
-        </div>
-      </div>
 
-      {/* Kanban Board */}
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCorners}
-        onDragStart={handleDragStart}
-        onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
-      >
-  <div className="flex gap-6 overflow-x-auto pb-6 -mx-2 px-2 snap-x snap-mandatory">
-          {columns.map((column) => {
-            const columnTasks = getTasksByColumn(column.id);
-            
-            return (
-              <div key={column.id} className="flex-shrink-0 min-w-[250px] w-72 md:w-80">
-                <div className="glass-card p-5 mb-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">{column.icon}</span>
-                      <h3 className="font-bold text-petrol">{column.name}</h3>
-                      <span className="px-2 py-0.5 bg-neutral-100 text-neutral-500 rounded-full text-xs font-semibold">
-                        {columnTasks.length}
-                      </span>
-                    </div>
-                    <button
-                      onClick={() => handleAddTask(column.id)}
-                      className="p-1.5 rounded-full bg-neutral-100 text-neutral-500 hover:text-electric"
-                    >
-                      ➕
-                    </button>
-                  </div>
-                </div>
-
-                <SortableContext items={columnTasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
-                  <div className="space-y-3 min-h-[200px] rounded-3xl p-3 border-2 border-dashed border-neutral-200 bg-white/60">
-                    {columnTasks.length === 0 ? (
-                      <div className="text-center py-12 text-neutral-400">
-                        <p className="text-sm">Sin tareas</p>
+        {/* Kanban Board */}
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCorners}
+          onDragStart={handleDragStart}
+          onDragOver={handleDragOver}
+          onDragEnd={handleDragEnd}
+        >
+          <div className="crm-card p-3 lg:p-4">
+            <div className="flex gap-6 overflow-x-auto pb-6 -mx-2 px-2 snap-x snap-mandatory">
+              {columns.map((column) => {
+                const columnTasks = getTasksByColumn(column.id);
+                
+                return (
+                  <div key={column.id} className="flex-shrink-0 min-w-[250px] w-72 md:w-80">
+                    <div className="glass-card p-5 mb-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">{column.icon}</span>
+                          <h3 className="font-bold text-petrol">{column.name}</h3>
+                          <span className="px-2 py-0.5 bg-neutral-100 text-neutral-500 rounded-full text-xs font-semibold">
+                            {columnTasks.length}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => handleAddTask(column.id)}
+                          className="p-1.5 rounded-full bg-neutral-100 text-neutral-500 hover:text-electric"
+                        >
+                          ➕
+                        </button>
                       </div>
-                    ) : (
-                      columnTasks.map((task) => (
-                        <TaskCard 
-                          key={task.id} 
-                          task={task} 
-                          onEdit={handleEditTask}
-                          onDelete={handleDelete}
-                        />
-                      ))
-                    )}
-                  </div>
-                </SortableContext>
-              </div>
-            );
-          })}
-        </div>
+                    </div>
 
-        <DragOverlay>
-          {activeId && activeTask ? (
-            <TaskCard task={activeTask} isDragging onEdit={() => {}} onDelete={() => {}} />
-          ) : null}
+                    <SortableContext items={columnTasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
+                      <div className="space-y-3 min-h-[200px] rounded-3xl p-3 border-2 border-dashed border-neutral-200 bg-white/80">
+                        {columnTasks.length === 0 ? (
+                          <div className="text-center py-12 text-neutral-400">
+                            <p className="text-sm">Sin tareas</p>
+                          </div>
+                        ) : (
+                          columnTasks.map((task) => (
+                            <TaskCard 
+                              key={task.id} 
+                              task={task} 
+                              onEdit={handleEditTask}
+                              onDelete={handleDelete}
+                            />
+                          ))
+                        )}
+                      </div>
+                    </SortableContext>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <DragOverlay>
+            {activeId && activeTask ? (
+              <TaskCard task={activeTask} isDragging onEdit={() => {}} onDelete={() => {}} />
+            ) : null}
         </DragOverlay>
       </DndContext>
 
@@ -552,6 +552,8 @@ const categoryOptions = [
             </div>
           );
         })}
+      </div>
+
       </div>
 
       {/* Modal Nueva/Editar Tarea */}
