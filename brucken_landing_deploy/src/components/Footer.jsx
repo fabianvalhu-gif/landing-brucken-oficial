@@ -81,14 +81,14 @@ export default function Footer() {
               Contáctanos →
             </a>
             
-            {/* Botón de acceso al intranet */}
+            {/* Botón de acceso al portal */}
             <div className="pt-6 border-t border-white/10">
               <a
                 href="/login"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-electric/20 border border-white/10 hover:border-electric/50 rounded-lg text-sm text-white/80 hover:text-electric transition-all group"
               >
                 <span>🔐</span>
-                <span className="font-medium">Acceso Intranet</span>
+                <span className="font-medium">Acceso Portal</span>
               </a>
             </div>
           </div>
