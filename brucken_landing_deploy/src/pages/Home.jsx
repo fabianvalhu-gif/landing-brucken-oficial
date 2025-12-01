@@ -9,12 +9,10 @@ import PodcastSection from "../components/PodcastSection";
 import Gallery from "../components/Gallery";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
-import SplashScreen from "../components/SplashScreen";
 
 export default function Home() {
   return (
     <>
-      <SplashScreen />
       {/* Wrapper landing-theme para aislar estilos oscuros sin afectar Intranet */}
       <div className="landing-theme min-h-screen">
         <Navbar />
