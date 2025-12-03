@@ -21,18 +21,17 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden pt-28 pb-24"
+      className="relative overflow-hidden pt-32 pb-24 min-h-screen"
       onMouseMove={handleMouseMove}
     >
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&q=80')] bg-cover bg-center opacity-18 mix-blend-screen" aria-hidden />
-      <div className="absolute inset-0 bg-[linear-gradient(115deg,#070a1f_0%,#0d1238_55%,#131a4d_85%)] opacity-95" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(155,172,216,0.28),transparent_45%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(249,133,19,0.24),transparent_34%)]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0b0f29e6] via-[#0b0f29cc] to-[#0b0f291a]" />
-      <div className="absolute inset-x-0 bottom-[-30%] h-[90%] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.06),transparent)]" />
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=2400&q=80')] bg-cover bg-center" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#070a1fdd] via-[#0d1238cc] to-[#1c214faa]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/25 to-black/35" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(155,172,216,0.32),transparent_48%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(249,133,19,0.24),transparent_38%)]" />
+      <div className="absolute inset-x-0 bottom-[-30%] h-[100%] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.05),transparent)]" />
       <div className="absolute -right-16 top-10 w-[520px] h-[520px] bg-[radial-gradient(circle,rgba(249,133,19,0.32)_0%,rgba(249,133,19,0)_62%)] blur-3xl opacity-70 pointer-events-none" />
       <div className="absolute -left-20 bottom-0 w-[580px] h-[520px] bg-[radial-gradient(circle,rgba(34,51,130,0.32)_0%,rgba(34,51,130,0)_62%)] blur-3xl opacity-65 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/18 to-black/25" />
 
       <div className="relative z-10 section-container grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center text-white">
         <motion.div

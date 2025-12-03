@@ -30,7 +30,7 @@ export default function Navbar() {
 
   const headerClass = scrolled
     ? "border-b border-neutral-200/80 bg-white/95 backdrop-blur-md shadow-sm"
-    : "border-b border-white/10 bg-transparent backdrop-blur-[2px]";
+    : "border-transparent bg-transparent";
 
   const linkColor = scrolled ? "text-neutral-700 hover:text-petrol" : "text-white hover:text-white/80";
   const buttonClass = scrolled ? "cta-button cta-primary px-5 py-2 text-sm" : "cta-button cta-primary px-5 py-2 text-sm shadow-glow";
