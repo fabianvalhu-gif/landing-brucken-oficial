@@ -46,14 +46,14 @@ export default function Hero() {
           </motion.div>
           <motion.h1
             variants={fadeIn("up", 0.1)}
-            className="text-4xl md:text-5xl lg:text-[56px] leading-[1.08] font-bold text-[#111827]"
+            className="text-4xl md:text-5xl lg:text-[56px] leading-[1.08] font-bold text-white"
           >
             Consultoría estratégica y software factory{" "}
             <span className="gradient-text">para LATAM & global.</span>
           </motion.h1>
           <motion.p
             variants={fadeIn("up", 0.2)}
-            className="text-lg text-[#374151] max-w-2xl"
+            className="text-lg text-white/90 max-w-2xl"
           >
             Aceleramos crecimiento, optimizamos operaciones y ejecutamos expansión comercial con squads
             híbridos senior + delivery ágil, desde la estrategia hasta el revenue.
