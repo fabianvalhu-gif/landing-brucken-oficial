@@ -21,20 +21,18 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden pt-28 pb-22"
+      className="relative overflow-hidden pt-28 pb-24"
       onMouseMove={handleMouseMove}
     >
-      <div className="absolute inset-0 bg-[linear-gradient(115deg,#0b0f29_0%,#111144_55%,#1c214f_80%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(155,172,216,0.25),transparent_42%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(249,133,19,0.22),transparent_32%)]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0b0f29cc] via-[#0b0f29aa] to-transparent backdrop-blur-[2px]" />
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2200&q=80')] bg-cover bg-center opacity-18 mix-blend-screen" aria-hidden />
-      <div className="absolute inset-x-0 bottom-[-25%] h-[80%] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.08),transparent)]" />
-      <div className="absolute -right-16 top-10 w-[520px] h-[520px] bg-[radial-gradient(circle,rgba(249,133,19,0.35)_0%,rgba(249,133,19,0)_60%)] blur-3xl opacity-70 pointer-events-none" />
-      <div className="absolute -left-20 bottom-10 w-[560px] h-[500px] bg-[radial-gradient(circle,rgba(34,51,130,0.35)_0%,rgba(34,51,130,0)_60%)] blur-3xl opacity-60 pointer-events-none" />
-
-      <div className="absolute -left-10 top-32 w-[360px] h-[360px] bg-gradient-to-br from-[#223382] to-transparent opacity-30 blur-[120px]" />
-      <div className="absolute right-10 top-24 w-[300px] h-[300px] bg-gradient-to-br from-[#f98513] via-[#f98513] to-transparent opacity-25 blur-[120px]" />
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&q=80')] bg-cover bg-center opacity-18 mix-blend-screen" aria-hidden />
+      <div className="absolute inset-0 bg-[linear-gradient(115deg,#070a1f_0%,#0d1238_55%,#131a4d_85%)] opacity-95" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(155,172,216,0.28),transparent_45%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(249,133,19,0.24),transparent_34%)]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0b0f29e6] via-[#0b0f29cc] to-[#0b0f291a]" />
+      <div className="absolute inset-x-0 bottom-[-30%] h-[90%] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.06),transparent)]" />
+      <div className="absolute -right-16 top-10 w-[520px] h-[520px] bg-[radial-gradient(circle,rgba(249,133,19,0.32)_0%,rgba(249,133,19,0)_62%)] blur-3xl opacity-70 pointer-events-none" />
+      <div className="absolute -left-20 bottom-0 w-[580px] h-[520px] bg-[radial-gradient(circle,rgba(34,51,130,0.32)_0%,rgba(34,51,130,0)_62%)] blur-3xl opacity-65 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/18 to-black/25" />
 
       <div className="relative z-10 section-container grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center text-white">
         <motion.div
