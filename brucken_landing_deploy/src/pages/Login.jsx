@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "../lib/supabase";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const highlights = [
   {
@@ -80,6 +81,9 @@ export default function Login() {
           </span>
         </a>
       </motion.div>
+      <div className="absolute top-6 right-6 z-20">
+        <LanguageSwitcher variant="light" />
+      </div>
 
       <div className="relative z-10 grid min-h-screen lg:grid-cols-2">
         {/* Panel lateral */}

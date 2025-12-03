@@ -1,109 +1,94 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black">
-      <div className="section-padding py-20">
-        {/* Main Footer Content */}
-        <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-4 pb-12 mb-12 border-b border-white/10">
+    <footer className="border-t border-neutral-200 bg-white">
+      <div className="section-container py-14">
+        {/* CTA superior */}
+        <div className="glass-card p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-10">
+          <div>
+            <p className="text-sm font-semibold text-electric uppercase tracking-[0.18em] mb-2">
+              ¿Listo para avanzar?
+            </p>
+            <h3 className="text-2xl font-bold text-petrol">Agenda una sesión estratégica con nuestro equipo.</h3>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a href="#contacto" className="cta-button cta-primary justify-center">
+              Contactar ahora
+            </a>
+            <a href="/login" className="cta-button cta-secondary justify-center">
+              Acceso portal
+            </a>
+          </div>
+        </div>
+
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 pb-10">
           {/* Logo & Description */}
-          <div className="lg:col-span-2">
-            <div className="mb-8">
-              <img 
-                src="/logo.png" 
-                alt="Brucken AG Global - Consultoría Estratégica, Software Factory y Representación Comercial" 
-                className="h-[200px] w-auto"
+          <div className="lg:col-span-2 space-y-4">
+            <div>
+              <img
+                src="/logo.png"
+                alt="Brucken AG Global - Consultoría Estratégica, Software Factory y Representación Comercial"
+                className="h-16 w-auto"
               />
             </div>
-            <p className="text-white/70 text-base leading-relaxed max-w-lg">
-              Transformamos estrategia en resultados. Consultoría estratégica, 
-              desarrollo de software y representación comercial para LATAM y mercados globales.
+            <p className="text-neutral-600 text-base leading-relaxed max-w-xl">
+              Transformamos estrategia en resultados. Consultoría estratégica, desarrollo de software y representación
+              comercial para LATAM y mercados globales.
             </p>
+            <div className="flex gap-3 flex-wrap">
+              <span className="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-sm font-semibold">C-level advisory</span>
+              <span className="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-sm font-semibold">Nearshore squads</span>
+              <span className="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-sm font-semibold">Pipeline & CRM</span>
+            </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-white font-semibold text-base uppercase tracking-wider mb-6">
+          <div className="space-y-4">
+            <h3 className="text-petrol font-semibold text-base uppercase tracking-wider">
               Servicios
             </h3>
-            <ul className="space-y-4">
-              <li>
-                <a href="#consultoria" className="text-white/70 hover:text-white transition-colors text-base">
-                  Consultoría Estratégica
-                </a>
-              </li>
-              <li>
-                <a href="#software" className="text-white/70 hover:text-white transition-colors text-base">
-                  Software Factory
-                </a>
-              </li>
-              <li>
-                <a href="#representacion" className="text-white/70 hover:text-white transition-colors text-base">
-                  Representación Comercial
-                </a>
-              </li>
-              <li>
-                <a href="#proyectos" className="text-white/70 hover:text-white transition-colors text-base">
-                  Proyectos
-                </a>
-              </li>
-              <li>
-                <a href="#podcast" className="text-white/70 hover:text-white transition-colors text-base">
-                  Podcast El Salto
-                </a>
-              </li>
+            <ul className="space-y-3 text-neutral-700">
+              <li><a href="#consultoria" className="hover:text-electric transition-colors">Consultoría Estratégica</a></li>
+              <li><a href="#software" className="hover:text-electric transition-colors">Software Factory</a></li>
+              <li><a href="#representacion" className="hover:text-electric transition-colors">Representación Comercial</a></li>
+              <li><a href="#proyectos" className="hover:text-electric transition-colors">Proyectos</a></li>
+              <li><a href="#podcast" className="hover:text-electric transition-colors">Podcast El Salto</a></li>
             </ul>
           </div>
 
           {/* Social & Contact */}
-          <div>
-            <h3 className="text-white font-semibold text-base uppercase tracking-wider mb-6">
+          <div className="space-y-4">
+            <h3 className="text-petrol font-semibold text-base uppercase tracking-wider">
               Conecta
             </h3>
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 text-neutral-700">
               {[
                 { name: "LinkedIn", url: "#" },
                 { name: "YouTube", url: "#" },
-                { name: "Spotify", url: "#" }
+                { name: "Spotify", url: "#" },
               ].map((network) => (
                 <a
                   key={network.name}
                   href={network.url}
-                  className="block text-white/70 hover:text-white transition-colors text-base"
+                  className="block hover:text-electric transition-colors"
                   aria-label={`Brucken AG Global en ${network.name}`}
                 >
                   {network.name}
                 </a>
               ))}
             </div>
-            <a
-              href="#contacto"
-              className="inline-flex items-center gap-2 text-base font-semibold text-electric hover:text-white transition-colors mb-6"
-            >
-              Contáctanos →
-            </a>
-            
-            {/* Botón de acceso al portal */}
-            <div className="pt-6 border-t border-white/10">
-              <a
-                href="/login"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-electric/20 border border-white/10 hover:border-electric/50 rounded-lg text-sm text-white/80 hover:text-electric transition-all group"
-              >
-                <span>🔐</span>
-                <span className="font-medium">Acceso Portal</span>
-              </a>
-            </div>
+            <p className="text-sm text-neutral-600">sales@bruckenglobal.com</p>
+            <p className="text-sm text-neutral-600">14 Norte 976, Viña del Mar, Chile</p>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-white/50 text-sm">
-          <p>
-            © {new Date().getFullYear()} Brucken AG Global. Todos los derechos reservados.
-          </p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-neutral-500 text-sm border-t border-neutral-200 pt-6">
+          <p>© {new Date().getFullYear()} Brucken AG Global. Todos los derechos reservados.</p>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-electric transition-colors">
               Política de Privacidad
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="#" className="hover:text-electric transition-colors">
               Términos de Servicio
             </a>
           </div>

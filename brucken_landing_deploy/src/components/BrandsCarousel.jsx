@@ -15,52 +15,37 @@ export default function BrandsCarousel() {
   const duplicatedBrands = [...brands, ...brands];
 
   return (
-    <section className="section-padding bg-gradient-to-b from-black via-black/95 to-black overflow-hidden">
+    <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(27,118,255,0.05),transparent_30%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_5%,rgba(124,58,237,0.05),transparent_28%)]" />
       <motion.div
-        className="max-w-7xl mx-auto"
+        className="relative section-container"
         variants={staggerContainer()}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
       >
         {/* Header */}
-        <motion.div variants={fadeIn("up")} className="text-center mb-16">
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
-            className="inline-block mb-6"
-          >
-            <div className="px-6 py-2 rounded-full bg-gradient-to-r from-electric/20 to-purple-500/20 border border-electric/30">
-              <p className="text-xs uppercase tracking-[0.4em] text-electric font-semibold">
-                Nuestras Marcas
-              </p>
-            </div>
-          </motion.div>
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4">
-            Marcas que Representamos
-          </h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
-            Conectamos empresas globales líderes con oportunidades de crecimiento en América Latina
+        <motion.div variants={fadeIn("up")} className="text-center mb-12 space-y-3">
+          <div className="pill-badge mx-auto">Nuestras Marcas</div>
+          <h2 className="text-3xl md:text-4xl font-bold text-petrol">Marcas que representamos</h2>
+          <p className="text-lg text-muted max-w-2xl mx-auto">
+            Conectamos empresas globales líderes con oportunidades de crecimiento en América Latina.
           </p>
         </motion.div>
 
         {/* Carrusel infinito */}
-        <motion.div
-          variants={fadeIn("up", 0.2)}
-          className="relative"
-        >
+        <motion.div variants={fadeIn("up", 0.2)} className="relative">
           {/* Gradientes en los bordes */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
 
           {/* Contenedor del carrusel */}
-          <div className="flex overflow-hidden">
+          <div className="flex overflow-hidden border border-neutral-200 rounded-2xl bg-white shadow-soft">
             <motion.div
-              className="flex gap-12 py-8"
+              className="flex gap-10 py-6"
               animate={{
-                x: [0, -1600], // Ajusta según el ancho total
+                x: [0, -1600],
               }}
               transition={{
                 x: {
@@ -73,16 +58,15 @@ export default function BrandsCarousel() {
             >
               {duplicatedBrands.map((brand, index) => (
                 <div
-                  key={index}
-                  className="flex-shrink-0 w-[280px] h-[140px] glass-card flex items-center justify-center p-2 group hover:border-electric/50 transition-all duration-300"
+                  key={`${brand.name}-${index}`}
+                  className="flex-shrink-0 w-[220px] h-[110px] flex items-center justify-center p-3 grayscale hover:grayscale-0 transition-all duration-300"
                 >
                   <img
                     src={brand.logo}
                     alt={brand.name}
-                    className="w-full h-full object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                    className="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
                     onError={(e) => {
-                      console.error(`Error loading logo: ${brand.logo}`);
-                      e.target.style.display = 'none';
+                      e.target.style.display = "none";
                     }}
                   />
                 </div>
@@ -92,23 +76,23 @@ export default function BrandsCarousel() {
 
           {/* Stats debajo del carrusel */}
           <motion.div
-            variants={fadeIn("up", 0.4)}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
+            variants={fadeIn("up", 0.35)}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10"
           >
             {[
-              { value: "10+", label: "Marcas Representadas" },
+              { value: "10+", label: "Marcas representadas" },
               { value: "15+", label: "Países" },
-              { value: "182+", label: "Clientes Activos" },
-              { value: "92%", label: "Tasa de Retención" },
+              { value: "182+", label: "Clientes activos" },
+              { value: "92%", label: "Retención" },
             ].map((stat, index) => (
               <div
-                key={index}
-                className="text-center p-6 glass-card hover:border-electric/30 transition-all duration-300"
+                key={stat.label}
+                className="text-center rounded-2xl border border-neutral-200 bg-white p-5 shadow-soft"
               >
-                <div className="text-3xl md:text-4xl font-bold text-electric mb-2">
+                <div className="text-2xl md:text-3xl font-bold text-petrol mb-1">
                   {stat.value}
                 </div>
-                <div className="text-sm text-white/60">{stat.label}</div>
+                <div className="text-sm text-neutral-600">{stat.label}</div>
               </div>
             ))}
           </motion.div>

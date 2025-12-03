@@ -74,93 +74,88 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contacto" className="section-padding">
+    <section id="contacto" className="relative py-16 sm:py-20 lg:py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_8%,rgba(27,118,255,0.05),transparent_30%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,rgba(124,58,237,0.05),transparent_28%)]" />
       <motion.div
-        className="max-w-5xl mx-auto grid gap-8 lg:grid-cols-2"
+        className="relative section-container grid gap-8 lg:grid-cols-2"
         variants={staggerContainer()}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.4 }}
+        viewport={{ once: true, amount: 0.25 }}
       >
         <motion.div variants={fadeIn("right")} className="space-y-5">
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
-            className="inline-block"
-          >
-            <div className="px-6 py-2 rounded-full bg-gradient-to-r from-electric/20 to-purple-500/20 border border-electric/30">
-              <p className="text-xs uppercase tracking-[0.4em] text-electric font-semibold">
-                Contacto
-              </p>
-            </div>
-          </motion.div>
-          <h2 className="text-3xl font-semibold">
+          <div className="pill-badge">Contacto</div>
+          <h2 className="text-3xl md:text-4xl font-bold text-petrol leading-snug">
             Diseñemos juntos la próxima fase de tu crecimiento.
           </h2>
-          <p className="text-white/70">
-            Cuéntanos sobre tus objetivos, dolores actuales o iniciativas pendientes. Nuestro equipo
-            responde en menos de 24 horas para agendar una reunión ejecutiva.
+          <p className="text-lg text-muted">
+            Cuéntanos tus objetivos, dolores actuales o iniciativas pendientes. Respondemos en menos de 24 horas para
+            agendar una reunión ejecutiva.
           </p>
-          <div className="space-y-2 text-white/70">
+          <div className="space-y-2 text-neutral-700">
             <p>📧 sales@bruckenglobal.com</p>
             <p>🌐 www.bruckenglobal.com</p>
             <p>📍 14 Norte 976, Viña del Mar, Chile</p>
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <span className="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-sm font-semibold">Respuesta en 24h</span>
+            <span className="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-sm font-semibold">Team senior</span>
+            <span className="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-sm font-semibold">Acceso remoto</span>
           </div>
         </motion.div>
 
         <motion.form
           variants={fadeIn("left", 0.1)}
           onSubmit={handleSubmit}
-          className="glass-card p-6 md:p-8 space-y-4"
+          className="glass-card p-6 sm:p-8 space-y-4"
         >
           {["name", "email", "phone", "company"].map((field) => (
             <div key={field} className="flex flex-col gap-1">
-              <label htmlFor={field} className="text-sm text-white/70">
+              <label htmlFor={field} className="text-sm text-neutral-700 font-semibold">
                 {fieldLabels[field]}
               </label>
               <input
                 id={field}
                 name={field}
                 type={field === "email" ? "email" : "text"}
-                className="bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-electric"
+                className="bg-white border border-neutral-200 rounded-xl px-4 py-3 text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/30"
                 value={formData[field]}
                 onChange={handleChange}
                 placeholder={placeholders[field] ?? ""}
               />
-              {errors[field] && <span className="text-xs text-red-400">{errors[field]}</span>}
+              {errors[field] && <span className="text-xs text-red-500">{errors[field]}</span>}
             </div>
           ))}
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="message" className="text-sm text-white/70">
+            <label htmlFor="message" className="text-sm text-neutral-700 font-semibold">
               Mensaje
             </label>
             <textarea
               id="message"
               name="message"
               rows="4"
-              className="bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-electric"
+              className="bg-white border border-neutral-200 rounded-xl px-4 py-3 text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/30"
               value={formData.message}
               onChange={handleChange}
               placeholder="Contexto, objetivos, KPIs..."
             />
-            {errors.message && <span className="text-xs text-red-400">{errors.message}</span>}
+            {errors.message && <span className="text-xs text-red-500">{errors.message}</span>}
           </div>
 
           <button
             type="submit"
-            className="cta-button bg-electric text-black w-full justify-center disabled:opacity-60"
+            className="cta-button cta-primary w-full justify-center disabled:opacity-60"
             disabled={status === "sending"}
           >
             {status === "sending" ? "Enviando..." : "Enviar mensaje"}
           </button>
           {errors.submit && (
-            <p className="text-sm text-red-400 text-center">{errors.submit}</p>
+            <p className="text-sm text-red-500 text-center">{errors.submit}</p>
           )}
           {status === "success" && (
-            <p className="text-sm text-green-400 text-center">
+            <p className="text-sm text-emerald-600 text-center font-semibold">
               Gracias por contactarnos. Te responderemos en breve.
             </p>
           )}

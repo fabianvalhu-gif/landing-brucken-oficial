@@ -21,38 +21,40 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-gradient-to-b from-black via-ebony to-black pt-36 pb-24"
+      className="relative overflow-hidden pt-28 pb-16"
       onMouseMove={handleMouseMove}
     >
-      <div className="absolute inset-0 opacity-70 bg-[radial-gradient(circle_at_top,_#1b76ff33,_transparent_50%)]" />
-      <div className="absolute inset-y-0 left-1/2 w-1/2 bg-hero-grid bg-[length:140px_140px] opacity-40" />
-      <div className="relative z-10 section-padding grid gap-12 lg:grid-cols-2 lg:items-center">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(27,118,255,0.12),transparent_28%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(124,58,237,0.1),transparent_25%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.95))]" />
+
+      <div className="relative z-10 section-container grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <motion.div
           variants={staggerContainer()}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.4 }}
-          className="space-y-8"
+          className="space-y-7"
         >
-          <motion.span
+          <motion.div
             variants={fadeIn("up", 0)}
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-white/60"
+            className="pill-badge w-fit"
           >
             Inteligencia + Ejecución + Tecnología
-          </motion.span>
+          </motion.div>
           <motion.h1
             variants={fadeIn("up", 0.1)}
-            className="text-4xl leading-tight font-semibold text-white md:text-5xl lg:text-6xl"
+            className="text-4xl md:text-5xl lg:text-[52px] leading-[1.15] font-bold text-petrol"
           >
-            Consultoría estratégica, innovación digital y representación comercial para
-            <span className="gradient-text"> LATAM & Global Markets</span>.
+            Consultoría estratégica y software factory{" "}
+            <span className="gradient-text">para LATAM & mercados globales.</span>
           </motion.h1>
           <motion.p
             variants={fadeIn("up", 0.2)}
-            className="text-lg text-white/70 max-w-xl"
+            className="text-lg text-muted max-w-2xl"
           >
-            Aceleramos crecimiento, optimizamos operaciones y construimos soluciones tecnológicas
-            de clase mundial para organizaciones que buscan dominar los mercados más competitivos.
+            Aceleramos crecimiento, optimizamos operaciones y ejecutamos expansión comercial con squads
+            híbridos senior + delivery ágil, desde la estrategia hasta el revenue.
           </motion.p>
           <motion.div
             variants={fadeIn("up", 0.3)}
@@ -60,16 +62,35 @@ export default function Hero() {
           >
             <a
               href="#contacto"
-              className="cta-button bg-electric text-black shadow-glow hover:bg-white"
+              className="cta-button cta-primary"
             >
               Agenda una reunión
             </a>
+            <a
+              href="#consultoria"
+              className="cta-button cta-secondary"
+            >
+              Ver consultoría
+            </a>
+          </motion.div>
+          <motion.div
+            variants={fadeIn("up", 0.35)}
+            className="flex flex-wrap gap-4"
+          >
+            {["C-level advisory", "Playbooks de revenue", "IA aplicada"].map((item) => (
+              <span
+                key={item}
+                className="px-3 py-2 rounded-full bg-white shadow-soft border border-neutral-200 text-sm text-neutral-700"
+              >
+                {item}
+              </span>
+            ))}
           </motion.div>
         </motion.div>
 
         <div className="relative">
           <motion.div
-            className="glass-card p-10 rounded-[32px]"
+            className="glass-card p-8 lg:p-10 rounded-3xl"
             style={{
               transform: `perspective(1200px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
             }}
@@ -78,36 +99,40 @@ export default function Hero() {
             whileInView="show"
             viewport={{ once: true, amount: 0.6 }}
           >
-            <div className="space-y-6">
-              <p className="text-sm uppercase tracking-[0.3em] text-white/60">
+            <div className="space-y-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">
                 Playbook Brucken
               </p>
-              <h2 className="text-3xl font-semibold">
-                Precisión estratégica + <span className="gradient-text">Software factory de alto desempeño</span> + Ejecución comercial.
+              <h2 className="text-2xl font-semibold text-petrol">
+                Precisión estratégica +{" "}
+                <span className="gradient-text">software factory de alto desempeño</span> + ejecución comercial.
               </h2>
-              <p className="text-sm text-white/70 leading-relaxed">
-                Modelamos, priorizamos y ejecutamos iniciativas con squads híbridos que conectan
-                consultores senior, diseñadores de producto y arquitectos de negocio.
+              <p className="text-sm text-neutral-600 leading-relaxed">
+                Modelamos, priorizamos y ejecutamos iniciativas con squads híbridos que conectan consultores
+                senior, diseñadores de producto y arquitectos de negocio.
               </p>
             </div>
-            <motion.div className="mt-10 grid gap-6 md:grid-cols-3" variants={staggerContainer(0.1, 0.4)}>
+            <motion.div
+              className="mt-8 grid gap-4 md:grid-cols-3"
+              variants={staggerContainer(0.1, 0.4)}
+            >
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
                   variants={fadeIn("up", index * 0.1)}
-                  className="border border-white/10 rounded-2xl px-4 py-3"
+                  className="rounded-2xl border border-neutral-200 bg-white/90 px-4 py-3 shadow-soft"
                 >
-                  <p className="text-2xl font-semibold text-white">{stat.value}</p>
-                  <p className="text-xs uppercase tracking-wide text-white/60">
+                  <p className="text-2xl font-semibold text-petrol">{stat.value}</p>
+                  <p className="text-[11px] uppercase tracking-[0.2em] text-neutral-500">
                     {stat.label}
                   </p>
-                  <p className="text-[11px] text-white/50 mt-1">{stat.detail}</p>
+                  <p className="text-[12px] text-neutral-500 mt-1">{stat.detail}</p>
                 </motion.div>
               ))}
             </motion.div>
           </motion.div>
           <motion.div
-            className="absolute -right-12 -bottom-12 w-32 h-32 rounded-full bg-electric blur-3xl opacity-50"
+            className="absolute -right-12 -bottom-10 w-32 h-32 rounded-full bg-electric/40 blur-3xl"
             {...floatVariant}
           />
         </div>

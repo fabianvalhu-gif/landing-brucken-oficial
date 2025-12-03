@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/animations";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const navLinks = [
   { label: "Consultoría", href: "#consultoria" },
@@ -16,38 +17,47 @@ export default function Navbar() {
 
   return (
     <motion.header
-      initial={{ opacity: 0, y: -40 }}
+      initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-      className="fixed top-0 left-0 w-full z-50 bg-black/65 backdrop-blur-xl border-b border-white/10"
+      transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
+      className="sticky top-0 z-50 border-b border-neutral-200/80 bg-white/90 backdrop-blur-lg shadow-sm"
     >
-      <nav className="flex items-center justify-between px-6 py-1 md:px-12 lg:px-24">
+      <nav className="section-container flex items-center justify-between py-3">
         <motion.a
           href="#hero"
-          className="flex items-center -my-16"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
+          className="flex items-center gap-3"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.2 }}
         >
-          <img 
-            src="/logo.png" 
-            alt="Brucken AG Global - Consultoría Estratégica y Software Factory LATAM" 
-            className="h-[180px] w-auto"
+          <img
+            src="/logo.png"
+            alt="Brucken AG Global - Consultoría Estratégica y Software Factory LATAM"
+            className="h-12 w-auto"
           />
+          <div className="hidden sm:block leading-tight">
+            <p className="text-xs font-semibold text-neutral-500 uppercase tracking-[0.22em]">
+              Brucken AG Global
+            </p>
+            <p className="text-sm font-semibold text-petrol">
+              Estrategia + Tecnología
+            </p>
+          </div>
         </motion.a>
 
-        <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-white/80">
+        <div className="hidden lg:flex items-center gap-7 text-sm font-semibold text-neutral-700">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="hover:text-white transition-colors duration-300"
+              className="hover:text-petrol transition-colors duration-200"
             >
               {link.label}
             </a>
           ))}
+          <LanguageSwitcher variant="light" />
           <a
             href="#contacto"
-            className="cta-button bg-electric text-black hover:bg-white"
+            className="cta-button cta-primary"
           >
             Agenda una reunión
           </a>
@@ -55,7 +65,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="lg:hidden text-white focus:outline-none"
+          className="lg:hidden text-petrol focus:outline-none"
           aria-label="Abrir menú"
           onClick={() => setOpen((prev) => !prev)}
         >
@@ -63,7 +73,7 @@ export default function Navbar() {
             {[0, 1, 2].map((bar) => (
               <span
                 key={`bar-${bar}`}
-                className={`block h-0.5 w-6 bg-white transition-transform ${
+                className={`block h-0.5 w-6 bg-petrol transition-transform ${
                   open && bar === 1 ? "opacity-0" : ""
                 } ${
                   open && bar !== 1
@@ -84,28 +94,31 @@ export default function Navbar() {
             animate="show"
             exit="hidden"
             variants={staggerContainer()}
-            className="lg:hidden bg-black border-t border-white/10"
+            className="lg:hidden border-t border-neutral-200 bg-white/95 backdrop-blur"
           >
             <motion.ul
               variants={fadeIn("up", 0.1)}
-              className="flex flex-col py-6 px-6 gap-4"
+              className="flex flex-col py-5 px-6 gap-3 text-neutral-800"
             >
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="text-white/80 text-lg"
+                    className="text-base font-semibold"
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
+              <li className="pt-2">
+                <LanguageSwitcher variant="light" />
+              </li>
               <li>
                 <a
                   href="#contacto"
                   onClick={() => setOpen(false)}
-                  className="cta-button bg-electric text-black w-full justify-center"
+                  className="cta-button cta-primary w-full justify-center"
                 >
                   Agenda una reunión
                 </a>

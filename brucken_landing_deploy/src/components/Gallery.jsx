@@ -82,50 +82,38 @@ export default function Gallery() {
       : galleryItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <section className="section-padding bg-gradient-to-b from-black via-black/98 to-black">
+    <section className="relative py-16 sm:py-20 lg:py-24 bg-[#f8f9fa]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(27,118,255,0.05),transparent_30%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(124,58,237,0.05),transparent_26%)]" />
       <motion.div
-        className="max-w-7xl mx-auto"
+        className="relative section-container"
         variants={staggerContainer()}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.15 }}
       >
         {/* Header */}
-        <motion.div variants={fadeIn("up")} className="text-center mb-12">
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
-            className="inline-block mb-6"
-          >
-            <div className="px-6 py-2 rounded-full bg-gradient-to-r from-electric/20 to-purple-500/20 border border-electric/30">
-              <p className="text-xs uppercase tracking-[0.4em] text-electric font-semibold">
-                Galería
-              </p>
-            </div>
-          </motion.div>
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4">
-            Nuestro Trabajo en Acción
-          </h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
-            Un vistazo a nuestros proyectos, equipo y la forma en que transformamos organizaciones
+        <motion.div variants={fadeIn("up")} className="text-center mb-10 space-y-3">
+          <div className="pill-badge mx-auto">Galería</div>
+          <h2 className="text-3xl md:text-4xl font-bold text-petrol">Nuestro trabajo en acción</h2>
+          <p className="text-lg text-muted">
+            Un vistazo a proyectos, equipo y la forma en que transformamos organizaciones.
           </p>
         </motion.div>
 
         {/* Filtros de categorías */}
         <motion.div
           variants={fadeIn("up", 0.2)}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-3 mb-10"
         >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 border ${
                 selectedCategory === category
-                  ? "bg-electric text-black shadow-glow"
-                  : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10"
+                  ? "bg-electric text-white border-electric shadow-soft"
+                  : "bg-white text-neutral-700 border-neutral-200 hover:border-electric/60 hover:text-petrol"
               }`}
             >
               {category}
@@ -139,53 +127,46 @@ export default function Gallery() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, index) => (
+            {filteredItems.map((item) => (
               <motion.div
                 key={item.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                className="relative group cursor-pointer overflow-hidden rounded-2xl aspect-[4/3]"
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className="relative group cursor-pointer overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-soft"
                 onMouseEnter={() => setHoveredItem(item.id)}
                 onMouseLeave={() => setHoveredItem(null)}
               >
-                {/* Imagen */}
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
 
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Badge de categoría */}
                 <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3 py-1 bg-electric/90 text-black text-xs font-medium rounded-full">
+                  <span className="px-3 py-1 bg-white/90 text-petrol text-xs font-semibold rounded-full border border-neutral-200 shadow-soft">
                     {item.category}
                   </span>
                 </div>
 
-                {/* Contenido */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
+                  <h3 className="text-lg font-semibold text-white drop-shadow">
                     {item.title}
                   </h3>
                   <p
-                    className={`text-sm text-white/80 transition-all duration-300 ${
-                      hoveredItem === item.id
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-2"
+                    className={`text-sm text-white/90 transition-all duration-300 ${
+                      hoveredItem === item.id ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
                     }`}
                   >
                     {item.description}
                   </p>
                 </div>
-
-                {/* Borde animado en hover */}
-                <div className="absolute inset-0 border-2 border-electric/0 group-hover:border-electric/50 rounded-2xl transition-all duration-300" />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -194,14 +175,14 @@ export default function Gallery() {
         {/* Call to action */}
         <motion.div
           variants={fadeIn("up", 0.4)}
-          className="text-center mt-16"
+          className="text-center mt-12"
         >
-          <p className="text-white/60 mb-6">
+          <p className="text-neutral-600 mb-4">
             ¿Quieres ver tu organización transformada?
           </p>
           <a
             href="#contacto"
-            className="cta-button bg-electric text-black shadow-glow hover:bg-white inline-flex"
+            className="cta-button cta-primary inline-flex"
           >
             Conversemos sobre tu proyecto
           </a>

@@ -13,8 +13,8 @@ import Footer from "../components/Footer";
 export default function Home() {
   return (
     <>
-      {/* Wrapper landing-theme para aislar estilos oscuros sin afectar Intranet */}
-      <div className="landing-theme min-h-screen">
+      {/* Shell de landing en modo claro, aislado del estilo de Intranet */}
+      <div className="landing-shell min-h-screen">
         <Navbar />
         <main>
           <Hero />

@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../../lib/supabase";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 export default function IntranetLayout({ children }) {
   const [user, setUser] = useState(null);
@@ -246,6 +247,7 @@ export default function IntranetLayout({ children }) {
                     className="bg-transparent focus:outline-none text-sm placeholder-neutral-500 w-56"
                   />
                 </div>
+                <LanguageSwitcher variant="light" />
                 <Link
                   to="/intranet/pipeline"
                   className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-electric text-black font-semibold shadow-glow hover:bg-white transition-colors"
