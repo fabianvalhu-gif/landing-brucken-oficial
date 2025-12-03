@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -110,6 +111,54 @@ export default async function handler(req, res) {
           probability: 10,
         },
       ]);
+    }
+
+    // 4) Enviar correo de notificación
+    try {
+      const {
+        SMTP_HOST,
+        SMTP_PORT,
+        SMTP_USER,
+        SMTP_PASS,
+        EMAIL_TO = "fabian.valenzuela@bruckenglobal.com",
+        EMAIL_FROM,
+      } = process.env;
+
+      if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
+        console.warn("SMTP config incompleta; no se envió correo");
+      } else {
+        const transporter = nodemailer.createTransport({
+          host: SMTP_HOST,
+          port: Number(SMTP_PORT),
+          secure: Number(SMTP_PORT) === 465,
+          auth: {
+            user: SMTP_USER,
+            pass: SMTP_PASS,
+          },
+        });
+
+        const from = EMAIL_FROM || `Landing Brucken <${SMTP_USER}>`;
+        const subject = `Nuevo lead desde landing: ${name}`;
+        const text = `
+Nuevo lead recibido desde la landing.
+
+Nombre: ${name}
+Email: ${email}
+Teléfono: ${phone || "N/A"}
+Empresa: ${company || "N/A"}
+
+Mensaje:
+${message || "Sin mensaje"}
+`;
+        await transporter.sendMail({
+          from,
+          to: EMAIL_TO,
+          subject,
+          text,
+        });
+      }
+    } catch (mailErr) {
+      console.error("No se pudo enviar el correo de aviso", mailErr);
     }
 
     return res.status(200).json({ ok: true });
