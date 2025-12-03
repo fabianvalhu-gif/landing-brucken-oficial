@@ -21,16 +21,18 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden pt-28 pb-16"
+      className="relative overflow-hidden pt-28 pb-20"
       onMouseMove={handleMouseMove}
     >
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2200&q=80')] bg-cover bg-center opacity-50" aria-hidden />
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,#101430_0%,#0b0e2a_55%,#1f0900_100%)] opacity-88" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(11,14,42,0.6),transparent_45%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(249,133,19,0.25),transparent_32%)]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/25" />
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=80')] bg-cover bg-center opacity-35" aria-hidden />
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,#0c102a_0%,#111144_45%,#1f0900_90%)] opacity-92" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_35%,rgba(155,172,216,0.35),transparent_40%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_20%,rgba(249,133,19,0.28),transparent_32%)]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black/35 via-transparent to-black/25" />
+      <div className="absolute -right-24 top-10 w-[520px] h-[520px] bg-[radial-gradient(circle,rgba(249,133,19,0.35)_0%,rgba(249,133,19,0)_60%)] blur-3xl opacity-70 pointer-events-none" />
+      <div className="absolute -left-32 bottom-0 w-[620px] h-[480px] bg-[radial-gradient(circle,rgba(34,51,130,0.35)_0%,rgba(34,51,130,0)_60%)] blur-3xl opacity-60 pointer-events-none" />
 
-      <div className="relative z-10 section-container grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center text-white">
+      <div className="relative z-10 section-container grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center text-white">
         <motion.div
           variants={staggerContainer()}
           initial="hidden"
@@ -40,20 +42,20 @@ export default function Hero() {
         >
           <motion.div
             variants={fadeIn("up", 0)}
-            className="pill-badge w-fit"
+            className="pill-badge w-fit bg-white/10 border-white/20 text-white/90"
           >
             Inteligencia + Ejecución + Tecnología
           </motion.div>
           <motion.h1
             variants={fadeIn("up", 0.1)}
-            className="text-4xl md:text-5xl lg:text-[56px] leading-[1.08] font-bold"
+            className="text-4xl md:text-5xl lg:text-[58px] leading-[1.05] font-bold drop-shadow-2xl"
           >
             Consultoría estratégica y software factory{" "}
             <span className="gradient-text">para LATAM & global.</span>
           </motion.h1>
           <motion.p
             variants={fadeIn("up", 0.2)}
-            className="text-lg text-white/80 max-w-2xl"
+            className="text-lg text-white/85 max-w-2xl drop-shadow-md"
           >
             Aceleramos crecimiento, optimizamos operaciones y ejecutamos expansión comercial con squads
             híbridos senior + delivery ágil, desde la estrategia hasta el revenue.
@@ -64,7 +66,7 @@ export default function Hero() {
           >
             <a
               href="#contacto"
-              className="cta-button cta-primary shadow-glow"
+              className="cta-button cta-primary shadow-[0_15px_45px_rgba(249,133,19,0.35)]"
             >
               Agenda una reunión
             </a>
@@ -82,7 +84,7 @@ export default function Hero() {
             {["C-level advisory", "Playbooks de revenue", "IA aplicada"].map((item) => (
               <span
                 key={item}
-                className="px-3 py-2 rounded-full bg-white/10 border border-white/20 text-sm text-white/90 backdrop-blur"
+                className="px-3 py-2 rounded-full bg-white/10 border border-white/25 text-sm text-white/90 backdrop-blur"
               >
                 {item}
               </span>
@@ -92,7 +94,7 @@ export default function Hero() {
 
         <div className="relative">
           <motion.div
-            className="glass-card p-8 lg:p-10 rounded-3xl border-white/20 bg-white/90 text-petrol"
+            className="glass-card p-8 lg:p-10 rounded-3xl border-white/30 bg-white/92 text-petrol shadow-[0_20px_60px_rgba(17,17,68,0.22)]"
             style={{
               transform: `perspective(1200px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
             }}
@@ -122,7 +124,7 @@ export default function Hero() {
                 <motion.div
                   key={stat.label}
                   variants={fadeIn("up", index * 0.1)}
-                  className="rounded-2xl border border-neutral-200 bg-gradient-to-br from-white to-[rgba(155,172,216,0.2)] px-4 py-3 shadow-soft"
+                  className="rounded-2xl border border-neutral-200/90 bg-gradient-to-br from-white to-[rgba(155,172,216,0.18)] px-4 py-3 shadow-[0_12px_30px_rgba(34,51,130,0.12)]"
                 >
                   <p className="text-2xl font-semibold text-petrol">{stat.value}</p>
                   <p className="text-[11px] uppercase tracking-[0.2em] text-neutral-500">
