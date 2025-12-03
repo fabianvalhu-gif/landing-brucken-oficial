@@ -21,7 +21,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden pt-32 pb-24 min-h-screen"
+      className="relative overflow-hidden -mt-16 lg:-mt-20 pt-40 lg:pt-48 pb-28 min-h-screen"
       onMouseMove={handleMouseMove}
     >
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=2400&q=80')] bg-cover bg-center" aria-hidden />
