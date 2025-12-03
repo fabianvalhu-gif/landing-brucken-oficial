@@ -40,7 +40,7 @@ export default function Hero() {
         >
           <motion.div
             variants={fadeIn("up", 0)}
-            className="pill-badge w-fit"
+            className="pill-badge w-fit bg-white/15 border-white/30 text-white shadow-[0_8px_24px_rgba(0,0,0,0.15)] backdrop-blur-sm"
           >
             Inteligencia + Ejecución + Tecnología
           </motion.div>
