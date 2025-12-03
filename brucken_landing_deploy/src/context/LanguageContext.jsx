@@ -103,6 +103,13 @@ export function LanguageProvider({ children }) {
     [applyLanguage, isReady, language]
   );
 
+  // Reaplica idioma cuando cambia el estado y el widget ya está listo.
+  useEffect(() => {
+    if (isReady) {
+      applyLanguage(language);
+    }
+  }, [language, isReady, applyLanguage]);
+
   return (
     <LanguageContext.Provider value={value}>
       <div id="google_translate_element" className="hidden" aria-hidden="true" />
