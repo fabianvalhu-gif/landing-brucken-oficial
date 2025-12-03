@@ -6,7 +6,8 @@ const team = [
     name: "Coming soon",
     role: "Pronto anunciaremos",
     bio: "Estamos sumando un nuevo líder a nuestro equipo. Muy pronto conocerás su perfil.",
-    avatar: "/gallery/fabian.jpeg", // placeholder
+    avatar: null,
+    placeholder: true,
   },
   {
     name: "Fabián Valenzuela",
@@ -15,7 +16,7 @@ const team = [
     avatar: "/gallery/fabian.jpeg",
   },
   {
-    name: "Matías",
+    name: "Matías Arancibia",
     role: "DevBridge & Commercial",
     bio: "Lidera DevBridge y gestión comercial; conecta delivery técnico con revenue en ciclos ágiles.",
     avatar: "/gallery/matias.png",
@@ -49,17 +50,42 @@ export default function AboutUs() {
               <motion.article
                 key={member.name}
                 variants={fadeIn("up", index * 0.1)}
-                className="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-soft"
+                className="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-soft text-center"
               >
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-gradient-to-br from-[rgba(249,133,19,0.4)] via-transparent to-[rgba(17,17,68,0.6)]" />
-                <div className="p-6 space-y-4">
-                  <div className="relative overflow-hidden rounded-2xl aspect-[4/3] bg-neutral-100">
-                    <img
-                      src={member.avatar}
-                      alt={member.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
+                <div className="p-6 space-y-4 flex flex-col items-center">
+                  <div className="relative overflow-hidden rounded-2xl aspect-[4/3] w-full bg-neutral-100 flex items-center justify-center">
+                    {member.placeholder ? (
+                      <div className="w-full h-full flex items-center justify-center bg-[#f5f6fa] text-[#a100ff]">
+                        <svg
+                          className="animate-spin h-10 w-10 text-[#a100ff]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          />
+                        </svg>
+                      </div>
+                    ) : (
+                      <img
+                        src={member.avatar}
+                        alt={member.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    )}
                   </div>
                   <div className="space-y-1">
                     <h3 className="text-xl font-bold text-petrol">{member.name}</h3>
