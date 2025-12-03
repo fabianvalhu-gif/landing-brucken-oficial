@@ -43,7 +43,7 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
       className={`sticky top-0 z-50 transition-all duration-300 ${headerClass} ${visible ? "translate-y-0" : "-translate-y-full"}`}
     >
-      <nav className="section-container flex items-center justify-between py-3">
+      <nav className="section-container flex items-center justify-between py-4 md:py-5">
         <motion.a
           href="#hero"
           className="flex items-center"
@@ -53,7 +53,7 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt="Brucken AG Global - Consultoría Estratégica y Software Factory LATAM"
-            className="h-24 w-auto md:h-28 lg:h-32"
+            className="h-2 w-auto md:h-8 lg:h-10"
           />
         </motion.a>
 
