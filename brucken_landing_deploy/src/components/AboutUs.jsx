@@ -3,22 +3,22 @@ import { fadeIn, staggerContainer } from "../utils/animations";
 
 const team = [
   {
-    name: "Camila Torres",
-    role: "CEO & Estrategia",
-    bio: "Lidera expansión y gobierno con 15+ años asesorando a corporativos en LATAM y EE.UU.",
-    avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&auto=format&fit=crop",
+    name: "Coming soon",
+    role: "Pronto anunciaremos",
+    bio: "Estamos sumando un nuevo líder a nuestro equipo. Muy pronto conocerás su perfil.",
+    avatar: "/gallery/fabian.jpeg", // placeholder
   },
   {
-    name: "Miguel Ríos",
-    role: "CTO & Producto",
-    bio: "Arquitecto de plataformas enterprise, IA aplicada y squads nearshore de alto desempeño.",
-    avatar: "https://images.unsplash.com/photo-1502764613149-7f1d229e2305?w=400&auto=format&fit=crop",
+    name: "Fabián Valenzuela",
+    role: "CEO & Founder",
+    bio: "Lidero estrategia, expansión y dirección de producto; 15+ años transformando empresas en LATAM.",
+    avatar: "/gallery/fabian.jpeg",
   },
   {
-    name: "Sofía Vidal",
-    role: "CRO & Revenue",
-    bio: "Diseña y ejecuta playbooks comerciales, pricing dinámico y aceleradores de revenue.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop",
+    name: "Matías",
+    role: "DevBridge & Commercial",
+    bio: "Lidera DevBridge y gestión comercial; conecta delivery técnico con revenue en ciclos ágiles.",
+    avatar: "/gallery/matias.png",
   },
 ];
 
