@@ -37,11 +37,7 @@
   ],
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/((?!assets/|api/|logo\\.png|robots\\.txt|sitemap\\.xml|gallery/|logos/).*)",
       "destination": "/index.html"
     }
   ]
