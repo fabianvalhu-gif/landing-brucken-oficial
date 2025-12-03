@@ -42,16 +42,6 @@ export default function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
       className={`sticky top-0 z-50 transition-all duration-300 ${headerClass} ${visible ? "translate-y-0" : "-translate-y-full"}`}
-      style={
-        scrolled
-          ? {}
-          : {
-              backgroundImage:
-                "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.2) 100%), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }
-      }
     >
       <nav className="section-container flex items-center justify-between py-3">
         <motion.a
