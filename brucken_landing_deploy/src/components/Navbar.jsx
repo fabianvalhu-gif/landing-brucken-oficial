@@ -29,8 +29,8 @@ export default function Navbar() {
   }, [lastY]);
 
   const headerClass = scrolled
-    ? "border-b border-neutral-200/80 bg-white/95 backdrop-blur-md shadow-sm"
-    : "border-transparent bg-transparent";
+    ? "border-b border-neutral-200/80 bg-white/95 backdrop-blur-md shadow-sm text-neutral-800"
+    : "border-transparent bg-transparent text-white";
 
   const linkColor = scrolled ? "text-neutral-700 hover:text-petrol" : "text-white hover:text-white/80";
   const buttonClass = scrolled ? "cta-button cta-primary px-5 py-2 text-sm" : "cta-button cta-primary px-5 py-2 text-sm shadow-glow";

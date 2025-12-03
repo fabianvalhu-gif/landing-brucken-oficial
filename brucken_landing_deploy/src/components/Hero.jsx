@@ -26,7 +26,8 @@ export default function Hero() {
     >
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=2400&q=80')] bg-cover bg-center" aria-hidden />
       <div className="absolute inset-0 bg-gradient-to-br from-[#070a1fdd] via-[#0d1238cc] to-[#1c214faa]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/25 to-black/35" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/35 to-black/45" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#060814]/85 via-[#0b0f29]/75 to-transparent" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_35%,rgba(155,172,216,0.32),transparent_48%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(249,133,19,0.24),transparent_38%)]" />
       <div className="absolute inset-x-0 bottom-[-30%] h-[100%] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.05),transparent)]" />
