@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/animations";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -7,20 +7,51 @@ const navLinks = [
   { label: "Consultoría", href: "#consultoria" },
   { label: "Software Factory", href: "#software" },
   { label: "Representación Comercial", href: "#representacion" },
-  { label: "Proyectos", href: "#proyectos" },
   { label: "Podcast", href: "#podcast" },
   { label: "Contacto", href: "#contacto" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastY, setLastY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      setVisible(y < 120 || y < lastY);
+      setLastY(y);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastY]);
+
+  const headerClass = scrolled
+    ? "border-b border-neutral-200/80 bg-white/95 backdrop-blur-md shadow-sm"
+    : "border-b border-white/10 bg-transparent backdrop-blur-[2px]";
+
+  const linkColor = scrolled ? "text-neutral-700 hover:text-petrol" : "text-white hover:text-white/80";
+  const buttonClass = scrolled ? "cta-button cta-primary px-5 py-2 text-sm" : "cta-button cta-primary px-5 py-2 text-sm shadow-glow";
+  const languageVariant = scrolled ? "light" : "dark";
 
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
-      className="sticky top-0 z-50 border-b border-neutral-200/80 bg-white/90 backdrop-blur-lg shadow-sm"
+      className={`sticky top-0 z-50 transition-all duration-300 ${headerClass} ${visible ? "translate-y-0" : "-translate-y-full"}`}
+      style={
+        scrolled
+          ? {}
+          : {
+              backgroundImage:
+                "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.2) 100%), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
+      }
     >
       <nav className="section-container flex items-center justify-between py-3">
         <motion.a
@@ -36,28 +67,28 @@ export default function Navbar() {
           />
         </motion.a>
 
-        <div className="hidden lg:flex items-center gap-6 text-sm font-semibold text-neutral-700 ml-auto">
+        <div className="hidden lg:flex items-center gap-6 text-sm font-semibold ml-auto">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="hover:text-petrol transition-colors duration-200"
+              className={`${linkColor} transition-colors duration-200`}
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contacto"
-            className="cta-button cta-primary px-5 py-2 text-sm"
+            className={buttonClass}
           >
             Agenda una reunión
           </a>
-          <LanguageSwitcher variant="light" />
+          <LanguageSwitcher variant={languageVariant} />
         </div>
 
         <button
           type="button"
-          className="lg:hidden text-petrol focus:outline-none"
+          className={`lg:hidden focus:outline-none ${scrolled ? "text-petrol" : "text-white"}`}
           aria-label="Abrir menú"
           onClick={() => setOpen((prev) => !prev)}
         >
