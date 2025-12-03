@@ -2,9 +2,9 @@ import { useMemo } from "react";
 import { useLanguage } from "../context/LanguageContext";
 
 const options = [
-  { code: "es", label: "Español" },
-  { code: "en", label: "English" },
-  { code: "de", label: "Deutsch" },
+  { code: "es", label: "🇪🇸" },
+  { code: "en", label: "🇺🇸" },
+  { code: "de", label: "🇩🇪" },
 ];
 
 export default function LanguageSwitcher({ variant = "dark" }) {
@@ -21,20 +21,14 @@ export default function LanguageSwitcher({ variant = "dark" }) {
     return `${base} bg-white/10 text-white border-white/20 hover:border-electric/60 px-3 py-2`;
   }, [variant]);
 
-  const labelColor =
-    variant === "light" ? "text-neutral-600" : "text-white/80";
-
   return (
-    <label className={`flex items-center gap-2 text-[13px] ${labelColor}`}>
-      <span className="hidden sm:inline-flex items-center gap-1">
-        <span aria-hidden>🌐</span>
-        <span className="text-xs">Idioma</span>
-      </span>
+    <div className="flex items-center">
       <select
         value={language}
         disabled={!isReady}
         onChange={(event) => changeLanguage(event.target.value)}
-        className={styles}
+        className={`${styles} min-w-[64px] text-center`}
+        aria-label="Seleccionar idioma"
       >
         {options.map((option) => (
           <option key={option.code} value={option.code}>
@@ -42,6 +36,6 @@ export default function LanguageSwitcher({ variant = "dark" }) {
           </option>
         ))}
       </select>
-    </label>
+    </div>
   );
 }

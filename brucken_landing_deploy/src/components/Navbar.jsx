@@ -25,7 +25,7 @@ export default function Navbar() {
       <nav className="section-container flex items-center justify-between py-3">
         <motion.a
           href="#hero"
-          className="flex items-center gap-3"
+          className="flex items-center"
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.2 }}
         >
@@ -34,17 +34,9 @@ export default function Navbar() {
             alt="Brucken AG Global - Consultoría Estratégica y Software Factory LATAM"
             className="h-12 w-auto"
           />
-          <div className="hidden sm:block leading-tight">
-            <p className="text-xs font-semibold text-neutral-500 uppercase tracking-[0.22em]">
-              Brucken AG Global
-            </p>
-            <p className="text-sm font-semibold text-petrol">
-              Estrategia + Tecnología
-            </p>
-          </div>
         </motion.a>
 
-        <div className="hidden lg:flex items-center gap-7 text-sm font-semibold text-neutral-700">
+        <div className="hidden lg:flex items-center gap-6 text-sm font-semibold text-neutral-700 ml-auto">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -54,13 +46,13 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <LanguageSwitcher variant="light" />
           <a
             href="#contacto"
-            className="cta-button cta-primary"
+            className="cta-button cta-primary px-5 py-2 text-sm"
           >
             Agenda una reunión
           </a>
+          <LanguageSwitcher variant="light" />
         </div>
 
         <button
