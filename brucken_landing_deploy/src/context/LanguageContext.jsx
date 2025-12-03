@@ -17,6 +17,20 @@ export function LanguageProvider({ children }) {
     if (combo) {
       combo.value = target;
       combo.dispatchEvent(new Event("change"));
+    } else {
+      // Si aún no existe el combo (widget tarda), reintenta unas veces.
+      let attempts = 0;
+      const interval = setInterval(() => {
+        const retryCombo = document.querySelector(".goog-te-combo");
+        if (retryCombo) {
+          retryCombo.value = target;
+          retryCombo.dispatchEvent(new Event("change"));
+          clearInterval(interval);
+        } else if (attempts > 20) {
+          clearInterval(interval);
+        }
+        attempts += 1;
+      }, 300);
     }
 
     document.documentElement.setAttribute("lang", target);
@@ -46,7 +60,7 @@ export function LanguageProvider({ children }) {
     setIsReady(true);
 
     // Aplica el idioma almacenado una vez que el widget esté listo
-    setTimeout(() => applyLanguage(language), 200);
+    setTimeout(() => applyLanguage(language), 300);
   }, [applyLanguage, language]);
 
   useEffect(() => {
