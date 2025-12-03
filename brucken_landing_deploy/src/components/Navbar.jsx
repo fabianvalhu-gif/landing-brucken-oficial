@@ -53,7 +53,7 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt="Brucken AG Global - Consultoría Estratégica y Software Factory LATAM"
-            className="h-16 w-auto md:h-18 lg:h-20"
+            className="h-24 w-auto md:h-28 lg:h-32"
           />
         </motion.a>
 
