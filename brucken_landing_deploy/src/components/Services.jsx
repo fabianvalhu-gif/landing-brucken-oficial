@@ -95,8 +95,8 @@ export default function Services() {
 
   return (
     <section id="consultoria" className="relative py-16 sm:py-20 lg:py-24 bg-[#f8f9fa]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(27,118,255,0.07),transparent_30%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_5%,rgba(124,58,237,0.06),transparent_28%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(155,172,216,0.12),transparent_30%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_5%,rgba(249,133,19,0.12),transparent_28%)]" />
       <div className="relative section-container">
         <motion.div
           initial="hidden"

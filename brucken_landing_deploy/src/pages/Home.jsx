@@ -9,6 +9,7 @@ import PodcastSection from "../components/PodcastSection";
 import Gallery from "../components/Gallery";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
+import AboutUs from "../components/AboutUs";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <Navbar />
         <main>
           <Hero />
+          <AboutUs />
           <ValueProposition />
           <Services />
           <SoftwareFactory />

@@ -103,8 +103,8 @@ export default function SoftwareFactory() {
 
   return (
     <section id="software" className="relative py-16 sm:py-20 lg:py-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(27,118,255,0.07),transparent_30%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,rgba(124,58,237,0.05),transparent_32%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(155,172,216,0.12),transparent_30%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,rgba(34,51,130,0.12),transparent_32%)]" />
       <div className="relative section-container">
         <motion.div
           initial="hidden"

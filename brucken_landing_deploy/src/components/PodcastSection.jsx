@@ -10,8 +10,8 @@ const episodes = [
 export default function PodcastSection() {
   return (
     <section id="podcast" className="relative py-16 sm:py-20 lg:py-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_15%,rgba(27,118,255,0.05),transparent_30%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_5%,rgba(124,58,237,0.05),transparent_28%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_15%,rgba(155,172,216,0.12),transparent_30%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_5%,rgba(249,133,19,0.12),transparent_28%)]" />
       <motion.div
         className="relative section-container"
         variants={staggerContainer()}

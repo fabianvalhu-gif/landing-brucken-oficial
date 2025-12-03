@@ -10,14 +10,9 @@ export default function Footer() {
             </p>
             <h3 className="text-2xl font-bold text-petrol">Agenda una sesión estratégica con nuestro equipo.</h3>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a href="#contacto" className="cta-button cta-primary justify-center">
-              Contactar ahora
-            </a>
-            <a href="/login" className="cta-button cta-secondary justify-center">
-              Acceso portal
-            </a>
-          </div>
+          <a href="#contacto" className="cta-button cta-primary justify-center">
+            Contactar ahora
+          </a>
         </div>
 
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 pb-10">
