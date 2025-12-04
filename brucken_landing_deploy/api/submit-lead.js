@@ -120,7 +120,7 @@ export default async function handler(req, res) {
         SMTP_PORT,
         SMTP_USER,
         SMTP_PASS,
-        EMAIL_TO = "fabian.valenzuela@bruckenglobal.com",
+        EMAIL_TO = "sales@bruckenglobal.com",
         EMAIL_FROM,
       } = process.env;
 
