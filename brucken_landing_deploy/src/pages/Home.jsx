@@ -6,7 +6,6 @@ import SoftwareFactory from "../components/SoftwareFactory";
 import Representation from "../components/Representation";
 import BrandsCarousel from "../components/BrandsCarousel";
 import PodcastSection from "../components/PodcastSection";
-import Showroom from "../components/Showroom";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
 import AboutUs from "../components/AboutUs";
@@ -26,7 +25,6 @@ export default function Home() {
           <Representation />
           <BrandsCarousel />
           <PodcastSection />
-          <Showroom />
           <ContactForm />
         </main>
         <Footer />
