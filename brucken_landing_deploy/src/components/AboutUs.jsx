@@ -3,23 +3,25 @@ import { fadeIn, staggerContainer } from "../utils/animations";
 
 const team = [
   {
-    name: "Coming soon",
-    role: "Pronto anunciaremos",
-    bio: "Estamos sumando un nuevo líder a nuestro equipo. Muy pronto conocerás su perfil.",
-    avatar: null,
-    placeholder: true,
-  },
-  {
     name: "Fabián Valenzuela",
     role: "CEO & Founder",
     bio: "Lidero estrategia, expansión y dirección de producto; 15+ años transformando empresas en LATAM.",
     avatar: "/gallery/fabian.jpeg",
+    placeholder: false,
   },
   {
     name: "Matías Arancibia",
     role: "DevBridge & Commercial",
     bio: "Lidera DevBridge y gestión comercial; conecta delivery técnico con revenue en ciclos ágiles.",
     avatar: "/gallery/matias.png",
+    placeholder: false,
+  },
+  {
+    name: "Coming soon",
+    role: "Pronto anunciaremos",
+    bio: "Estamos sumando un nuevo líder a nuestro equipo. Muy pronto conocerás su perfil.",
+    avatar: null,
+    placeholder: true,
   },
 ];
 
