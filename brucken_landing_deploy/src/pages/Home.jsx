@@ -9,6 +9,7 @@ import PodcastSection from "../components/PodcastSection";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
 import AboutUs from "../components/AboutUs";
+import MarketingConsulting from "../components/MarketingConsulting";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
           <AboutUs />
           <ValueProposition />
           <Services />
+          <MarketingConsulting />
           <SoftwareFactory />
           <Representation />
           <BrandsCarousel />
