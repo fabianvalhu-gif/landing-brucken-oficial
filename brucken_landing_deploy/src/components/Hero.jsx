@@ -27,7 +27,10 @@ export default function Hero() {
       <div className="absolute inset-0 bg-white" aria-hidden />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(161,0,255,0.08),transparent_45%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,75,139,0.08),transparent_38%)]" />
-      <div className="absolute inset-0 bg-[url('/hero.jpg')] bg-cover bg-center opacity-12 mix-blend-multiply transform scale-x-[-1]" />
+      <div
+        className="absolute inset-0 bg-[url('/hero.jpg')] bg-cover bg-center opacity-12 mix-blend-multiply"
+        style={{ transform: "scaleX(-1)" }}
+      />
       <div className="absolute inset-x-0 bottom-[-10%] h-[70%] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(0,0,0,0.04),transparent)]" />
 
       <div className="relative z-10 section-container grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center text-white">
