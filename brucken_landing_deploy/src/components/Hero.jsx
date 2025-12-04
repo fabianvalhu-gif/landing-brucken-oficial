@@ -48,13 +48,12 @@ export default function Hero() {
           >
             Inteligencia + Ejecución + Tecnología
           </motion.div>
-          <motion.h1
-            variants={fadeIn("up", 0.1)}
-            className="text-4xl md:text-5xl lg:text-[56px] leading-[1.08] font-bold text-white"
-          >
-            Consultoría estratégica y software factory{" "}
-            <span className="gradient-text">para LATAM & global.</span>
-          </motion.h1>
+          <motion.div variants={fadeIn("up", 0.1)}>
+            <h1 className="text-4xl md:text-5xl lg:text-[56px] leading-[1.08] font-bold text-white">
+              Consultoría estratégica y software factory{" "}
+              <span className="gradient-text">para LATAM & global.</span>
+            </h1>
+          </motion.div>
           <motion.p
             variants={fadeIn("up", 0.2)}
             className="text-lg text-white/90 max-w-2xl"
