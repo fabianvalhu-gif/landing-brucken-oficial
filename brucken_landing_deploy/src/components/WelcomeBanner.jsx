@@ -11,7 +11,7 @@ export default function WelcomeBanner() {
   const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
 
   return (
-    <section ref={ref} className="w-full bg-white relative">
+  <section ref={ref} className="w-full relative">
       <div className="w-full overflow-hidden">
         <motion.div
           className="flex w-full"
