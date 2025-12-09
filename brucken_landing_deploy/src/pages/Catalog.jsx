@@ -4,16 +4,21 @@ import { motion } from "framer-motion";
 import { supabase } from "../lib/supabase";
 
 const products = [
-  { id: 1, name: "All-Terrain 17\"", brand: "Brücken Grip", segment: "SUV / Pickup", price: 189, stock: 42, features: ["4x4", "Silica compound", "M+S"] },
-  { id: 2, name: "Highway 16\"", brand: "Brücken Road", segment: "Comercial", price: 142, stock: 68, features: ["Carga pesada", "Baja resistencia", "Garantía 60k"] },
-  { id: 3, name: "Sport 19\"", brand: "Brücken Edge", segment: "Performance", price: 229, stock: 21, features: ["ZR speed", "Run-flat", "Baja sonoridad"] },
-  { id: 4, name: "Winter 18\"", brand: "Brücken Snow", segment: "SUV / Invierno", price: 205, stock: 33, features: ["Caucho nórdico", "Laminillas 3D", "3PMSF"] },
+  { id: 1, name: "UNIGLORY AgriGrip 18\"", brand: "UNIGLORY", segment: "Agriculture Tires", price: 188, stock: 46, features: ["Talón reforzado", "Resistencia a pinchazos", "Alta tracción"], portfolios: ["UNIGLORY"] },
+  { id: 2, name: "UNIGLORY HarvestPro 20\"", brand: "UNIGLORY", segment: "Agriculture Tires", price: 214, stock: 32, features: ["Baja compactación", "Autolimpieza", "Trabajo continuo"], portfolios: ["UNIGLORY"] },
+  { id: 3, name: "TESCHE TrailForce 17\"", brand: "TESCHE", segment: "4x4 Tires", price: 199, stock: 54, features: ["M+S", "Silica compound", "Flanco protegido"], portfolios: ["TESCHE"] },
+  { id: 4, name: "TESCHE Ridge AT 18\"", brand: "TESCHE", segment: "4x4 Tires", price: 221, stock: 28, features: ["All-terrain", "Baja sonoridad", "Garantía 60k"], portfolios: ["TESCHE"] },
+  { id: 5, name: "ANSU FleetMax 22.5\"", brand: "ANSU", segment: "Truck & Bus Tires", price: 312, stock: 71, features: ["Alta carga", "Baja resistencia", "Wear control"], portfolios: ["ANSU"] },
+  { id: 6, name: "ANSU RoadLine 20.5\"", brand: "ANSU", segment: "Truck & Bus Tires", price: 284, stock: 63, features: ["Larga distancia", "Protección lateral", "Sensor-ready"], portfolios: ["ANSU"] },
+  { id: 7, name: "LING LONG TerraX 20\"", brand: "LING LONG", segment: "PCR / TBR / OTR Tires", price: 248, stock: 52, features: ["PCR/TBR", "Bajo ruido", "Compuesto premium"], portfolios: ["LING LONG"] },
+  { id: 8, name: "LING LONG OTR Core 24\"", brand: "LING LONG", segment: "PCR / TBR / OTR Tires", price: 338, stock: 24, features: ["OTR", "Cortes y astillas", "Talón reforzado"], portfolios: ["LING LONG"] },
 ];
 
-const samplePortfolios = [
-  { name: "Latam Norte", brands: ["Grip", "Road"], accounts: 24 },
-  { name: "Retail Chile", brands: ["Edge", "Grip"], accounts: 12 },
-  { name: "Flotas Cono Sur", brands: ["Road", "Snow"], accounts: 18 },
+const portfolios = [
+  { key: "UNIGLORY", label: "UNIGLORY", description: "Agriculture Tires", color: "bg-[#f5f3ff] text-[#5b21b6]" },
+  { key: "TESCHE", label: "TESCHE", description: "4x4 Tires", color: "bg-[#ecfeff] text-[#0f172a]" },
+  { key: "ANSU", label: "ANSU", description: "Truck & Bus Tires", color: "bg-[#f0fdf4] text-[#065f46]" },
+  { key: "LING LONG", label: "LING LONG", description: "PCR, TBR and OTR Tires", color: "bg-[#fff7ed] text-[#9a3412]" },
 ];
 
 export default function Catalog() {
@@ -23,6 +28,7 @@ export default function Catalog() {
   const [selectedProduct, setSelectedProduct] = useState(products[0].id);
   const [quantity, setQuantity] = useState(4);
   const [newUser, setNewUser] = useState({ email: "", name: "", role: "user" });
+  const [activePortfolio, setActivePortfolio] = useState("UNIGLORY");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,6 +45,12 @@ export default function Catalog() {
         const email = data.session.user.email || "";
         setRole(email.toLowerCase().includes("admin") ? "admin" : "user");
       }
+      const savedPortfolio = localStorage.getItem("brucken_portfolio");
+      if (savedPortfolio && portfolios.find((p) => p.key === savedPortfolio)) {
+        setActivePortfolio(savedPortfolio);
+      } else {
+        setActivePortfolio("UNIGLORY");
+      }
       setSessionChecked(true);
     };
     checkSession();
@@ -52,6 +64,13 @@ export default function Catalog() {
       }, 0),
     [quoteItems]
   );
+
+  const filteredProducts = useMemo(
+    () => products.filter((p) => p.portfolios.includes(activePortfolio)),
+    [activePortfolio]
+  );
+
+  const activePortfolioMeta = portfolios.find((p) => p.key === activePortfolio);
 
   const handleAddToQuote = () => {
     const productId = Number(selectedProduct);
@@ -78,6 +97,11 @@ export default function Catalog() {
     setNewUser({ email: "", name: "", role: "user" });
   };
 
+  const handleChangePortfolio = (value) => {
+    setActivePortfolio(value);
+    localStorage.setItem("brucken_portfolio", value);
+  };
+
   if (!sessionChecked) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-950 text-white">
@@ -90,63 +114,74 @@ export default function Catalog() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden text-white">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[url('/hero.jpg')] bg-cover bg-center scale-105" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#030712]/92 via-[#0b1633]/82 to-[#05070f]/92" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_22%,rgba(161,0,255,0.35),transparent_28%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_12%,rgba(255,75,139,0.26),transparent_24%)]" />
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-10 lg:py-16">
+    <div className="min-h-screen bg-[#f7f8fb] text-[#0f172a]">
+      <div className="max-w-6xl mx-auto px-6 py-10 lg:py-16">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.26em] text-white/70">Portal Distribuidores</p>
-            <h1 className="text-3xl md:text-4xl font-bold mt-2">Catálogo de Neumáticos</h1>
-            <p className="text-white/75 mt-1">Role: <span className="font-semibold uppercase">{role}</span></p>
+            <p className="text-xs uppercase tracking-[0.22em] text-neutral-500">Portal Distribuidores</p>
+            <h1 className="text-3xl md:text-4xl font-bold mt-2 text-petrol">Catálogo de Neumáticos</h1>
+            <div className="mt-2 flex items-center gap-2 text-sm text-neutral-600">
+              <span className="px-2 py-1 rounded-full bg-neutral-100 text-neutral-700 font-semibold uppercase tracking-[0.08em]">
+                {role}
+              </span>
+              {activePortfolioMeta && (
+                <span className={`px-2 py-1 rounded-full text-xs font-semibold ${activePortfolioMeta.color}`}>
+                  {activePortfolioMeta.label} · {activePortfolioMeta.description}
+                </span>
+              )}
+            </div>
           </div>
           <div className="flex items-center gap-3">
             <a
               href="/"
-              className="px-3 py-2 rounded-full border border-white/15 bg-white/10 text-sm hover:bg-white/20"
+              className="px-3 py-2 rounded-full border border-neutral-200 bg-white text-sm hover:shadow-sm transition"
             >
               Volver a la landing
             </a>
-            <span className="px-3 py-2 rounded-full bg-electric text-black text-xs font-bold tracking-[0.18em] uppercase shadow-glow">
-              {role === "admin" ? "Admin" : "Usuario"}
-            </span>
+            <div className="flex items-center gap-2">
+              <label className="text-xs text-neutral-500">Portafolio</label>
+              <select
+                value={activePortfolio}
+                onChange={(e) => handleChangePortfolio(e.target.value)}
+                className="px-3 py-2 rounded-full border border-neutral-200 bg-white text-sm font-semibold"
+              >
+                {portfolios.map((p) => (
+                  <option key={p.key} value={p.key}>{p.label}</option>
+                ))}
+              </select>
+            </div>
           </div>
         </header>
 
         <div className="grid gap-6 md:grid-cols-3">
           <div className="md:col-span-2 space-y-4">
-            <section className="rounded-3xl border border-white/12 bg-white/8 backdrop-blur-xl p-6 shadow-[0_12px_36px_rgba(0,0,0,0.28)]">
+            <section className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/60">Portafolio</p>
-                  <h2 className="text-xl font-bold">Neumáticos destacados</h2>
+                  <p className="text-xs uppercase tracking-[0.18em] text-neutral-500">Portafolio activo</p>
+                  <h2 className="text-xl font-bold text-petrol">Neumáticos destacados</h2>
                 </div>
                 <span className="text-xs px-3 py-1 rounded-full border border-electric/40 text-electric bg-electric/10">
                   Stock dinámico
                 </span>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
-                {products.map((product) => (
-                  <div key={product.id} className="rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-electric/50 transition-colors">
+                {filteredProducts.map((product) => (
+                  <div key={product.id} className="rounded-2xl border border-neutral-200 bg-white p-5 hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm text-white/60">{product.brand}</p>
-                        <h3 className="text-xl font-semibold">{product.name}</h3>
-                        <p className="text-sm text-white/70">{product.segment}</p>
+                        <p className="text-sm text-neutral-500">{product.brand}</p>
+                        <h3 className="text-xl font-semibold text-petrol">{product.name}</h3>
+                        <p className="text-sm text-neutral-600">{product.segment}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-2xl font-bold">${product.price}</p>
-                        <p className="text-xs text-emerald-300">Stock {product.stock}</p>
+                        <p className="text-2xl font-bold text-petrol">${product.price}</p>
+                        <p className="text-xs text-emerald-600">Stock {product.stock}</p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2 mt-4">
                       {product.features.map((feat) => (
-                        <span key={feat} className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10">
+                        <span key={feat} className="px-3 py-1 rounded-full text-xs bg-neutral-100 text-neutral-700 border border-neutral-200">
                           {feat}
                         </span>
                       ))}
@@ -158,11 +193,11 @@ export default function Catalog() {
                           setQuantity(4);
                           handleAddToQuote();
                         }}
-                        className="text-sm font-semibold text-electric hover:text-white transition-colors"
+                        className="text-sm font-semibold text-electric hover:text-petrol transition-colors"
                       >
                         Agregar a cotización
                       </button>
-                      <span className="text-xs text-white/60">SKU-{product.id.toString().padStart(4, "0")}</span>
+                      <span className="text-xs text-neutral-500">SKU-{product.id.toString().padStart(4, "0")}</span>
                     </div>
                   </div>
                 ))}
@@ -170,58 +205,59 @@ export default function Catalog() {
             </section>
 
             {role === "admin" && (
-              <section className="rounded-3xl border border-white/12 bg-white/8 backdrop-blur-xl p-6 shadow-[0_12px_36px_rgba(0,0,0,0.28)]">
+              <section className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/60">Gestión de accesos</p>
-                    <h2 className="text-xl font-bold">Crear cuenta y asignar portafolio</h2>
+                    <p className="text-xs uppercase tracking-[0.18em] text-neutral-500">Gestión de accesos</p>
+                    <h2 className="text-xl font-bold text-petrol">Crear cuenta y asignar portafolio</h2>
                   </div>
-                  <span className="text-xs px-3 py-1 rounded-full border border-white/15 text-white/70">
+                  <span className="text-xs px-3 py-1 rounded-full border border-neutral-200 text-neutral-600">
                     Solo Admin
                   </span>
                 </div>
                 <form className="grid sm:grid-cols-2 gap-4" onSubmit={handleCreateUser}>
                   <div className="space-y-2">
-                    <label className="text-sm text-white/70">Nombre</label>
+                    <label className="text-sm text-neutral-700">Nombre</label>
                     <input
                       type="text"
                       required
                       value={newUser.name}
                       onChange={(e) => setNewUser((u) => ({ ...u, name: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-2xl border border-white/12 bg-white/8 focus:outline-none focus:border-electric/60 text-white placeholder-white/50"
+                      className="w-full px-4 py-3 rounded-2xl border border-neutral-200 bg-white focus:outline-none focus:border-electric/60 text-neutral-900 placeholder-neutral-400"
                       placeholder="Ej: Camila Ríos"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm text-white/70">Correo</label>
+                    <label className="text-sm text-neutral-700">Correo</label>
                     <input
                       type="email"
                       required
                       value={newUser.email}
                       onChange={(e) => setNewUser((u) => ({ ...u, email: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-2xl border border-white/12 bg-white/8 focus:outline-none focus:border-electric/60 text-white placeholder-white/50"
+                      className="w-full px-4 py-3 rounded-2xl border border-neutral-200 bg-white focus:outline-none focus:border-electric/60 text-neutral-900 placeholder-neutral-400"
                       placeholder="usuario@distribuidor.com"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm text-white/70">Rol</label>
+                    <label className="text-sm text-neutral-700">Rol</label>
                     <select
                       value={newUser.role}
                       onChange={(e) => setNewUser((u) => ({ ...u, role: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-2xl border border-white/12 bg-white/8 focus:outline-none focus:border-electric/60 text-white bg-transparent"
+                      className="w-full px-4 py-3 rounded-2xl border border-neutral-200 bg-white focus:outline-none focus:border-electric/60 text-neutral-900"
                     >
-                      <option className="text-black" value="user">Usuario</option>
-                      <option className="text-black" value="admin">Admin</option>
+                      <option value="user">Usuario</option>
+                      <option value="admin">Admin</option>
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm text-white/70">Portafolio</label>
+                    <label className="text-sm text-neutral-700">Portafolio</label>
                     <select
-                      className="w-full px-4 py-3 rounded-2xl border border-white/12 bg-white/8 focus:outline-none focus:border-electric/60 text-white bg-transparent"
-                      defaultValue="Latam Norte"
+                      className="w-full px-4 py-3 rounded-2xl border border-neutral-200 bg-white focus:outline-none focus:border-electric/60 text-neutral-900"
+                      value={activePortfolio}
+                      onChange={(e) => handleChangePortfolio(e.target.value)}
                     >
-                      {samplePortfolios.map((p) => (
-                        <option className="text-black" key={p.name} value={p.name}>{p.name}</option>
+                      {portfolios.map((p) => (
+                        <option key={p.key} value={p.key}>{p.label} · {p.description}</option>
                       ))}
                     </select>
                   </div>
@@ -235,12 +271,12 @@ export default function Catalog() {
                   </div>
                 </form>
 
-                <div className="mt-6 grid sm:grid-cols-3 gap-3">
-                  {samplePortfolios.map((p) => (
-                    <div key={p.name} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                      <p className="text-sm font-semibold">{p.name}</p>
-                      <p className="text-xs text-white/60 mt-1">{p.brands.join(" · ")}</p>
-                      <p className="text-xs text-emerald-300 mt-2">Accesos: {p.accounts}</p>
+                <div className="mt-6 grid sm:grid-cols-4 gap-3">
+                  {portfolios.map((p) => (
+                    <div key={p.key} className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
+                      <p className="text-sm font-semibold text-petrol">{p.label}</p>
+                      <p className="text-xs text-neutral-600 mt-1">{p.description}</p>
+                      <p className="text-xs text-emerald-700 mt-2">Accesos activos: 12</p>
                     </div>
                   ))}
                 </div>
@@ -249,19 +285,19 @@ export default function Catalog() {
           </div>
 
           <aside className="space-y-4">
-            <section className="rounded-3xl border border-white/12 bg-white/8 backdrop-blur-xl p-5 shadow-[0_12px_36px_rgba(0,0,0,0.28)]">
+            <section className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-semibold">Cotizador rápido</h3>
-                <span className="text-xs text-white/60">Simular pedido</span>
+                <h3 className="text-lg font-semibold text-petrol">Cotizador rápido</h3>
+                <span className="text-xs text-neutral-500">Simular pedido</span>
               </div>
               <div className="space-y-3">
                 <select
                   value={selectedProduct}
                   onChange={(e) => setSelectedProduct(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl border border-white/12 bg-white/8 focus:outline-none focus:border-electric/60 text-white bg-transparent"
+                  className="w-full px-4 py-3 rounded-2xl border border-neutral-200 bg-white focus:outline-none focus:border-electric/60 text-neutral-900"
                 >
-                  {products.map((p) => (
-                    <option className="text-black" key={p.id} value={p.id}>
+                  {filteredProducts.map((p) => (
+                    <option key={p.id} value={p.id}>
                       {p.name} · ${p.price}
                     </option>
                   ))}
@@ -271,7 +307,7 @@ export default function Catalog() {
                   min="1"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
-                  className="w-full px-4 py-3 rounded-2xl border border-white/12 bg-white/8 focus:outline-none focus:border-electric/60 text-white"
+                  className="w-full px-4 py-3 rounded-2xl border border-neutral-200 bg-white focus:outline-none focus:border-electric/60 text-neutral-900"
                 />
                 <button
                   onClick={handleAddToQuote}
@@ -281,23 +317,23 @@ export default function Catalog() {
                 </button>
               </div>
               <div className="mt-4 space-y-3">
-                {quoteItems.length === 0 && <p className="text-sm text-white/60">Sin items aún.</p>}
+                {quoteItems.length === 0 && <p className="text-sm text-neutral-500">Sin items aún.</p>}
                 {quoteItems.map((item) => {
                   const product = products.find((p) => p.id === item.productId);
                   if (!product) return null;
                   return (
-                    <div key={item.productId} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-3 py-2">
+                    <div key={item.productId} className="flex items-center justify-between rounded-2xl border border-neutral-200 bg-neutral-50 px-3 py-2">
                       <div>
-                        <p className="text-sm font-semibold">{product.name}</p>
-                        <p className="text-xs text-white/60">
+                        <p className="text-sm font-semibold text-petrol">{product.name}</p>
+                        <p className="text-xs text-neutral-600">
                           {item.qty} u · ${product.price} c/u
                         </p>
                       </div>
                       <div className="flex items-center gap-3">
-                        <p className="text-sm font-semibold">${product.price * item.qty}</p>
+                        <p className="text-sm font-semibold text-petrol">${product.price * item.qty}</p>
                         <button
                           onClick={() => handleRemoveQuoteItem(item.productId)}
-                          className="text-xs text-red-200 hover:text-red-100"
+                          className="text-xs text-red-500 hover:text-red-400"
                         >
                           x
                         </button>
@@ -307,31 +343,31 @@ export default function Catalog() {
                 })}
               </div>
               <div className="mt-4 flex items-center justify-between">
-                <p className="text-sm text-white/70">Total estimado</p>
-                <p className="text-xl font-bold">${totalQuote}</p>
+                <p className="text-sm text-neutral-600">Total estimado</p>
+                <p className="text-xl font-bold text-petrol">${totalQuote}</p>
               </div>
             </section>
 
-            <section className="rounded-3xl border border-white/12 bg-white/8 backdrop-blur-xl p-5 shadow-[0_12px_36px_rgba(0,0,0,0.28)]">
+            <section className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-semibold">Resumen</h3>
-                <span className="text-xs text-white/60">Estado</span>
+                <h3 className="text-lg font-semibold text-petrol">Resumen</h3>
+                <span className="text-xs text-neutral-500">Estado</span>
               </div>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/70">Órdenes activas</span>
-                  <span className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-sm font-semibold">3</span>
+                  <span className="text-sm text-neutral-600">Órdenes activas</span>
+                  <span className="px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-sm font-semibold text-petrol">3</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/70">Entregas pendientes</span>
-                  <span className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-sm font-semibold">5</span>
+                  <span className="text-sm text-neutral-600">Entregas pendientes</span>
+                  <span className="px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200 text-sm font-semibold text-petrol">5</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/70">Tiempo estimado</span>
-                  <span className="text-sm font-semibold">48h</span>
+                  <span className="text-sm text-neutral-600">Tiempo estimado</span>
+                  <span className="text-sm font-semibold text-petrol">48h</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/70">Contacto dedicado</span>
+                  <span className="text-sm text-neutral-600">Contacto dedicado</span>
                   <span className="text-sm font-semibold text-electric">sales@bruckenglobal.com</span>
                 </div>
               </div>
