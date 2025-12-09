@@ -34,7 +34,6 @@ export default function Navbar() {
 
   const linkColor = scrolled ? "text-neutral-700 hover:text-petrol" : "text-white hover:text-white/80";
   const buttonClass = scrolled ? "cta-button cta-primary px-5 py-2 text-sm" : "cta-button cta-primary px-5 py-2 text-sm shadow-glow";
-  const portalButtonClass = scrolled ? "cta-button cta-secondary px-5 py-2 text-sm" : "cta-button cta-secondary px-5 py-2 text-sm shadow-glow";
   const languageVariant = scrolled ? "light" : "dark";
   const topClass = scrolled ? "top-0" : "top-3 sm:top-4";
   const logoClass = scrolled
@@ -48,7 +47,15 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
       className={`sticky ${topClass} z-50 transition-all duration-300 ${headerClass} ${visible ? "translate-y-0" : "-translate-y-full"}`}
     >
-      <nav className="section-container flex items-center justify-between py-5 md:py-6 lg:py-7">
+      <nav className="section-container relative flex items-center justify-between py-5 md:py-6 lg:py-7">
+        <a
+          href="/login"
+          className={`hidden lg:block absolute right-0 -top-2 text-[11px] font-semibold tracking-[0.18em] uppercase ${
+            scrolled ? "text-neutral-600 hover:text-petrol" : "text-white/80 hover:text-white"
+          }`}
+        >
+          Portal Distribuidores
+        </a>
         <motion.a
           href="#hero"
           className="flex items-center"
@@ -72,12 +79,6 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href="/login"
-            className={portalButtonClass}
-          >
-            Portal Distribuidores
-          </a>
           <a
             href="#contacto"
             className={buttonClass}
@@ -142,7 +143,7 @@ export default function Navbar() {
                 <a
                   href="/login"
                   onClick={() => setOpen(false)}
-                  className="cta-button cta-secondary w-full justify-center"
+                  className="text-base font-semibold text-petrol"
                 >
                   Portal Distribuidores
                 </a>
