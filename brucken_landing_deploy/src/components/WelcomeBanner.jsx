@@ -32,10 +32,6 @@ export default function WelcomeBanner() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Fundido lateral para integrar con el fondo */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white via-white/70 to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white via-white/70 to-transparent z-10" />
-
           <div className="relative w-full bg-transparent">
             <div className="aspect-[16/6] sm:aspect-[16/5] lg:aspect-[16/4.5] w-full">
               <AnimatePresence mode="wait">
