@@ -17,11 +17,11 @@ const team = [
     placeholder: false,
   },
   {
-    name: "Coming soon",
-    role: "Pronto anunciaremos",
-    bio: "Estamos sumando un nuevo líder a nuestro equipo. Muy pronto conocerás su perfil.",
-    avatar: null,
-    placeholder: true,
+    name: "Oscar Brito",
+    role: "Operations & Commercial",
+    bio: "Lidera la operación comercial y es precursor de Catalyst Bridge.",
+    avatar: "/gallery/oscar.png",
+    placeholder: false,
   },
 ];
 
