@@ -7,6 +7,7 @@ const brands = [
   { name: "Logmasters", logo: "/logos/3.png", country: "BR" },
   { name: "SMZ", logo: "/logos/4.png", country: "CL" },
   { name: "Helios", logo: "/logos/5.png", country: "AR" },
+  { name: "Atlas", logo: "/logos/6.png", country: "MX" },
 ];
 
 export default function BrandsCarousel() {
@@ -31,7 +32,7 @@ export default function BrandsCarousel() {
 
         <motion.div variants={fadeIn("up", 0.15)} className="relative w-full">
           <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-white via-white/60 to-white/40 blur-3xl" />
-          <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 p-5 rounded-[24px] border border-white/60 bg-white/90 shadow-[0_20px_50px_-22px_rgba(15,23,42,0.35)] backdrop-blur">
+          <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 p-5 rounded-[24px] border border-white/60 bg-white/90 shadow-[0_20px_50px_-22px_rgba(15,23,42,0.35)] backdrop-blur">
             {brands.map((brand, index) => (
               <motion.div
                 key={brand.name}
@@ -60,12 +61,12 @@ export default function BrandsCarousel() {
           variants={fadeIn("up", 0.3)}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12"
         >
-          {[
-            { value: "5", label: "Marcas representadas" },
-            { value: "+7", label: "Países" },
-            { value: "+500", label: "Clientes" },
-            { value: "90%", label: "Retención" },
-          ].map((stat) => (
+            {[
+              { value: "6", label: "Marcas representadas" },
+              { value: "+7", label: "Países" },
+              { value: "+500", label: "Clientes" },
+              { value: "90%", label: "Retención" },
+            ].map((stat) => (
             <div
               key={stat.label}
               className="text-center rounded-2xl border border-neutral-200 bg-white p-5 shadow-soft"
