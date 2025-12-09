@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/animations";
 
 const brands = [
-  { name: "Aufbruch", logo: "/logos/1.png", country: "DE" },
-  { name: "Guardian", logo: "/logos/2.png", country: "US" },
-  { name: "Logmasters", logo: "/logos/3.png", country: "BR" },
-  { name: "SMZ", logo: "/logos/4.png", country: "CL" },
-  { name: "Helios", logo: "/logos/5.png", country: "AR" },
-  { name: "Atlas", logo: "/logos/6.png", country: "MX" },
+  { name: "Aufbruch", logo: "/logos/1.png", country: "CHINA" },
+  { name: "Guardian", logo: "/logos/2.png", country: "BELGICA" },
+  { name: "Logmasters", logo: "/logos/3.png", country: "CHILE" },
+  { name: "SMZ", logo: "/logos/4.png", country: "CHINA" },
+  { name: "Helios", logo: "/logos/5.png", country: "CHINA" },
+  { name: "Atlas", logo: "/logos/6.png", country: "CHINA" },
 ];
 
 export default function BrandsCarousel() {
