@@ -42,9 +42,10 @@ const steps = [
 ];
 
 const trust = [
-  { label: "Marcas globales representadas", value: "20+" },
-  { label: "Países cubiertos", value: "8" },
-  { label: "Ciclos de negocio", value: "6-12m" },
+  { label: "Marcas representadas", value: "6" },
+  { label: "Países", value: "+7" },
+  { label: "Clientes", value: "+500" },
+  { label: "Retención", value: "90%" },
 ];
 
 export default function Representation() {
@@ -120,7 +121,7 @@ export default function Representation() {
             variants={fadeIn("up", 0.2)}
             className="glass-card p-7 sm:p-9 flex flex-col md:flex-row items-center justify-between gap-6"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
               {trust.map((item) => (
                 <div key={item.label} className="rounded-xl border border-neutral-200 bg-white p-4 text-center shadow-soft">
                   <p className="text-2xl font-bold text-petrol">{item.value}</p>
