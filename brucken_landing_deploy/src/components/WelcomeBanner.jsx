@@ -24,30 +24,30 @@ export default function WelcomeBanner() {
   return (
     <section
       ref={ref}
-      className="relative py-10 sm:py-14 lg:py-16 overflow-hidden bg-[#f8f9fa]"
+      className="relative py-8 sm:py-12 lg:py-14 overflow-hidden bg-[#f8f9fa]"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(155,172,216,0.12),transparent_30%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(34,51,130,0.12),transparent_26%)]" />
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen max-w-none">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,51,130,0.08),transparent_42%)]" />
+      <div className="relative w-screen left-1/2 -translate-x-1/2 max-w-none">
         <motion.div
           className="relative w-full overflow-hidden"
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="relative w-full bg-[#f8f9fa] bg-[radial-gradient(circle_at_50%_20%,rgba(34,51,130,0.08),transparent_45%),radial-gradient(circle_at_10%_10%,rgba(155,172,216,0.08),transparent_35%)]">
-            <div className="aspect-[16/6] sm:aspect-[16/5] lg:aspect-[16/4.5] w-full">
+          <div className="relative w-full bg-[#f8f9fa]">
+            <div className="aspect-[21/9] sm:aspect-[16/6] lg:aspect-[16/5] w-full">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={slides[index].src}
                   src={slides[index].src}
                   alt={slides[index].alt}
-                  className="w-full h-full object-contain block"
+                  className="w-full h-full object-cover md:object-contain block"
                   loading="lazy"
                   initial={{ opacity: 0, x: 40 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -40 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
+                  style={{ filter: "drop-shadow(0px 20px 60px rgba(0,0,0,0.08))" }}
                 />
               </AnimatePresence>
             </div>
