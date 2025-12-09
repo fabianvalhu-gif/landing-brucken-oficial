@@ -35,15 +35,19 @@ export default function Navbar() {
   const linkColor = scrolled ? "text-neutral-700 hover:text-petrol" : "text-white hover:text-white/80";
   const buttonClass = scrolled ? "cta-button cta-primary px-5 py-2 text-sm" : "cta-button cta-primary px-5 py-2 text-sm shadow-glow";
   const languageVariant = scrolled ? "light" : "dark";
+  const topClass = scrolled ? "top-0" : "top-3 sm:top-4";
+  const logoClass = scrolled
+    ? "h-7 w-auto sm:h-8 md:h-9 lg:h-10 brightness-0"
+    : "h-7 w-auto sm:h-8 md:h-9 lg:h-10";
 
   return (
     <motion.header
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
-      className={`sticky top-0 z-50 transition-all duration-300 ${headerClass} ${visible ? "translate-y-0" : "-translate-y-full"}`}
+      className={`sticky ${topClass} z-50 transition-all duration-300 ${headerClass} ${visible ? "translate-y-0" : "-translate-y-full"}`}
     >
-      <nav className="section-container flex items-center justify-between py-6 md:py-7 lg:py-8">
+      <nav className="section-container flex items-center justify-between py-5 md:py-6 lg:py-7">
         <motion.a
           href="#hero"
           className="flex items-center"
@@ -53,7 +57,7 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt="Brucken AG Global - Consultoría Estratégica y Software Factory LATAM"
-            className="h-2 w-auto md:h-8 lg:h-10"
+            className={logoClass}
           />
         </motion.a>
 

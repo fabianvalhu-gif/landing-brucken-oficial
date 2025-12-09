@@ -22,7 +22,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="Brucken AG Global - Consultoría Estratégica, Software Factory y Representación Comercial"
-                className="h-16 w-auto"
+                className="h-16 w-auto filter brightness-0"
               />
             </div>
             <p className="text-neutral-600 text-base leading-relaxed max-w-xl">
