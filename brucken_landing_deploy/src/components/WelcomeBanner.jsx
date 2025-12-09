@@ -28,14 +28,14 @@ export default function WelcomeBanner() {
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(155,172,216,0.12),transparent_30%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(34,51,130,0.12),transparent_26%)]" />
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen">
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen max-w-none">
         <motion.div
           className="relative w-full overflow-hidden"
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="relative w-full bg-transparent">
+          <div className="relative w-full bg-[#f8f9fa] bg-[radial-gradient(circle_at_50%_20%,rgba(34,51,130,0.08),transparent_45%),radial-gradient(circle_at_10%_10%,rgba(155,172,216,0.08),transparent_35%)]">
             <div className="aspect-[16/6] sm:aspect-[16/5] lg:aspect-[16/4.5] w-full">
               <AnimatePresence mode="wait">
                 <motion.img
