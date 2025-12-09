@@ -42,8 +42,8 @@ export default function Login() {
 
       if (authError) throw authError;
 
-      // Redirigir al portal
-      navigate("/intranet");
+      // Redirigir a la landing (portal removido)
+      navigate("/");
     } catch (err) {
       setError(err.message);
     } finally {
