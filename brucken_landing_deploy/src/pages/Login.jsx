@@ -2,24 +2,23 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "../lib/supabase";
-import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const highlights = [
   {
-    title: "CRM + Pipeline",
-    detail: "Seguimiento de deals, contactos y boards en un solo lugar.",
+    title: "Catálogo vivo",
+    detail: "Stock, precios y lanzamientos en tiempo real para tus pedidos.",
   },
   {
-    title: "Data protegida",
-    detail: "Autenticación segura con Supabase y accesos auditados.",
+    title: "Órdenes y tracking",
+    detail: "Sigue estados de despacho y confirmaciones en un solo lugar.",
   },
   {
-    title: "Acceso 24/7",
-    detail: "Portal disponible siempre para el equipo y clientes.",
+    title: "Soporte prioritario",
+    detail: "Equipo Brucken contigo en cada venta y postventa.",
   },
   {
-    title: "Soporte cercano",
-    detail: "Equipo Brucken listo para ayudarte en cada paso.",
+    title: "Material comercial",
+    detail: "Kits de marca, presentaciones y casos listos para compartir.",
   },
 ];
 
@@ -53,100 +52,98 @@ export default function Login() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-[#05070f] via-[#0c1c30] to-[#05070f] text-white overflow-hidden">
-      {/* Efectos de fondo */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -left-10 top-10 w-80 h-80 bg-electric/20 blur-3xl" />
-        <div className="absolute right-[-6rem] bottom-20 w-96 h-96 bg-purple-500/25 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.05),_transparent_40%)]" />
+    <div className="relative min-h-screen overflow-hidden text-white">
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[url('/hero.jpg')] bg-cover bg-center scale-105 brightness-90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0d1e]/92 via-[#0b1633]/85 to-[#0a0d1e]/94" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(161,0,255,0.35),transparent_28%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_12%,rgba(255,75,139,0.3),transparent_24%)]" />
       </div>
 
-      {/* Logo y enlace a home */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="absolute top-6 left-6 z-20"
-      >
-        <a
-          href="/"
-          className="flex items-center gap-3 px-3 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
-        >
-          <img
-            src="/logo.png"
-            alt="Brucken AG Global"
-            className="h-10 w-auto"
-          />
-          <span className="text-sm font-semibold text-white/80">
-            Volver al sitio
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-10 lg:py-16">
+        <div className="flex items-center justify-between mb-10">
+          <motion.a
+            href="/"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-3 px-3 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
+          >
+            <img
+              src="/logo.png"
+              alt="Brucken AG Global"
+              className="h-10 w-auto"
+            />
+            <span className="text-sm font-semibold text-white/80">
+              Volver a la landing
+            </span>
+          </motion.a>
+          <span className="text-[11px] font-semibold tracking-[0.26em] uppercase text-white/70">
+            Portal Distribuidores
           </span>
-        </a>
-      </motion.div>
-      <div className="absolute top-6 right-6 z-20">
-        <LanguageSwitcher variant="light" />
-      </div>
+        </div>
 
-      <div className="relative z-10 grid min-h-screen lg:grid-cols-2">
-        {/* Panel lateral */}
-        <div className="hidden lg:flex flex-col justify-between border-r border-white/10 px-12 py-16 bg-white/5">
-          <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-xs uppercase tracking-[0.25em] text-white/70">
-              Acceso Portal
-            </div>
-            <h1 className="text-4xl font-semibold mt-6 leading-tight">
-              Portal seguro para el equipo y clientes de Brucken.
-            </h1>
-            <p className="text-white/70 mt-4 max-w-xl">
-              Gestiona pipeline, leads y actividades con visibilidad total.
-              Conectado a Supabase para mantener tus datos protegidos.
-            </p>
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
+          <div className="space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/15 bg-white/10 text-xs uppercase tracking-[0.24em] text-white/70 w-fit"
+            >
+              Acceso seguro · Distribuidores
+            </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 }}
+              className="text-4xl md:text-5xl font-bold leading-tight"
+            >
+              Tu portal para pedidos, materiales y soporte de{" "}
+              <span className="gradient-text">Brücken Global</span>.
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-lg text-white/80 max-w-2xl"
+            >
+              Gestiona tu relación con Brucken: órdenes priorizadas, disponibilidad de catálogo,
+              documentos listos para compartir y acompañamiento dedicado para acelerar tus ventas.
+            </motion.p>
 
-            <div className="grid grid-cols-2 gap-4 mt-10">
-              {highlights.map((item) => (
-                <div
+            <div className="grid sm:grid-cols-2 gap-4">
+              {highlights.map((item, idx) => (
+                <motion.div
                   key={item.title}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.12 + idx * 0.05 }}
+                  className="rounded-2xl border border-white/15 bg-white/5 backdrop-blur-lg p-4 shadow-[0_18px_40px_rgba(0,0,0,0.16)]"
                 >
-                  <p className="text-sm text-electric font-semibold mb-1">
+                  <p className="text-sm font-semibold text-electric mb-1">
                     {item.title}
                   </p>
-                  <p className="text-white/70 text-sm">{item.detail}</p>
-                </div>
+                  <p className="text-white/75 text-sm leading-relaxed">{item.detail}</p>
+                </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="flex items-center gap-8 pt-10 border-t border-white/10">
-            <div>
-              <p className="text-3xl font-semibold">99.9%</p>
-              <p className="text-white/60 text-sm">Disponibilidad mensual</p>
-            </div>
-            <div>
-              <p className="text-3xl font-semibold">24/7</p>
-              <p className="text-white/60 text-sm">Monitoreo y alertas</p>
-            </div>
-            <div>
-              <p className="text-3xl font-semibold">+5</p>
-              <p className="text-white/60 text-sm">Módulos activos</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Formulario */}
-        <div className="flex items-center justify-center p-6 sm:p-10 lg:p-16">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="w-full max-w-md"
+            className="w-full max-w-md ml-auto"
           >
-            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-glow">
-              <div className="mb-8">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-electric/30 bg-electric/10 text-electric text-xs font-semibold uppercase tracking-[0.28em]">
-                  Acceso Portal
+            <div className="relative rounded-3xl border border-white/12 bg-white/8 backdrop-blur-2xl p-8 shadow-[0_18px_60px_rgba(0,0,0,0.28)] overflow-hidden">
+              <div className="absolute -top-16 -right-10 w-44 h-44 bg-gradient-to-br from-electric to-petrol opacity-40 blur-3xl" />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-electric/40 bg-electric/10 text-electric text-[11px] font-semibold uppercase tracking-[0.26em]">
+                  Portal Distribuidores
                 </div>
-                <h2 className="text-3xl font-bold mt-4">Inicia sesión</h2>
+                <h2 className="text-3xl font-bold mt-5">Inicia sesión</h2>
                 <p className="text-white/70 mt-2">
-                  Usa tu correo corporativo y contraseña para entrar al portal.
+                  Usa tu correo y contraseña entregados por el equipo Brucken para acceder al portal.
                 </p>
               </div>
 
@@ -154,13 +151,13 @@ export default function Login() {
                 <motion.div
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 rounded-2xl border border-red-500/40 bg-red-500/10"
+                  className="relative mt-6 mb-4 p-4 rounded-2xl border border-red-500/40 bg-red-500/10"
                 >
                   <p className="text-red-200 text-sm">{error}</p>
                 </motion.div>
               )}
 
-              <form onSubmit={handleLogin} className="space-y-5">
+              <form onSubmit={handleLogin} className="relative mt-6 space-y-5">
                 <div className="space-y-2">
                   <label
                     htmlFor="email"
@@ -174,7 +171,7 @@ export default function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-4 py-3 rounded-2xl border border-white/10 bg-white/5 focus:outline-none focus:border-electric/60 text-white placeholder-white/40 transition-colors"
+                    className="w-full px-4 py-3 rounded-2xl border border-white/12 bg-white/8 focus:outline-none focus:border-electric/70 text-white placeholder-white/50 transition-colors"
                     placeholder="persona@brucken.com"
                     disabled={loading}
                     autoComplete="email"
@@ -194,7 +191,7 @@ export default function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full px-4 py-3 rounded-2xl border border-white/10 bg-white/5 focus:outline-none focus:border-electric/60 text-white placeholder-white/40 transition-colors"
+                    className="w-full px-4 py-3 rounded-2xl border border-white/12 bg-white/8 focus:outline-none focus:border-electric/70 text-white placeholder-white/50 transition-colors"
                     placeholder="••••••••"
                     disabled={loading}
                     autoComplete="current-password"
@@ -237,10 +234,10 @@ export default function Login() {
                 </motion.button>
               </form>
 
-              <div className="mt-8 flex items-center justify-between text-xs text-white/60">
+              <div className="relative mt-7 flex items-center justify-between text-xs text-white/70">
                 <div className="flex items-center gap-2">
                   <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Servicio en línea 24/7</span>
+                  <span>Servicio activo 24/7</span>
                 </div>
                 <a
                   href="mailto:soporte@brucken.com"
