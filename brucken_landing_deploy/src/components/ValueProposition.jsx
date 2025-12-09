@@ -12,7 +12,7 @@ const pillars = [
     icon: "🎯",
     accent: "from-blue-500 to-cyan-500",
     pill: "bg-blue-100 text-blue-900",
-    stats: ["EBIT-focused", "Financial modeling", "Executive roadmaps"],
+    stats: ["EBIT", "Modelado financiero", "Roadmaps ejecutivos"],
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const pillars = [
     icon: "⚡",
     accent: "from-purple-500 to-pink-500",
     pill: "bg-purple-100 text-purple-900",
-    stats: ["Monthly cycles", "Hybrid squads", "Fast delivery"],
+    stats: ["Ciclos mensuales", "Squads híbridos", "Entrega rápida"],
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const pillars = [
     icon: "🚀",
     accent: "from-orange-500 to-red-500",
     pill: "bg-orange-100 text-orange-900",
-    stats: ["AI-powered", "Data-driven", "Digital products"],
+    stats: ["AI-powered", "Data-driven", "Productos digitales"],
   },
 ];
 

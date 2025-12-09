@@ -57,8 +57,8 @@ export default function Footer() {
             </h3>
             <div className="space-y-3 text-neutral-700">
               {[
-                { name: "LinkedIn", url: "#" },
-                { name: "YouTube", url: "#" },
+                { name: "LinkedIn", url: "https://www.linkedin.com/company/brückenglobal/" },
+                { name: "Instagram", url: "https://www.instagram.com/brucken_global" },
                 { name: "Spotify", url: "#" },
               ].map((network) => (
                 <a

@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { fadeIn, staggerContainer, floatVariant } from "../utils/animations";
 
 const stats = [
-  { label: "Áreas de consultoría", value: "5", detail: "Estrategia a ejecución" },
-  { label: "Marcas globales", value: "20+", detail: "Representadas en LATAM" },
+  { label: "Áreas de consultoría", value: "4", detail: "Estrategia a ejecución" },
+  { label: "Marcas globales", value: "+5", detail: "Representadas en LATAM" },
   { label: "Tiempo promedio", value: "6-12m", detail: "Proyectos estratégicos" },
 ];
 
@@ -106,7 +106,7 @@ export default function Hero() {
           >
             <div className="space-y-4">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#374151]">
-                Playbook Brucken
+                Playbook Brücken Global
               </p>
               <h2 className="text-2xl font-semibold text-[#111827]">
                 Precisión estratégica +{" "}
