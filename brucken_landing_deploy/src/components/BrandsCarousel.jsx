@@ -12,7 +12,7 @@ const brands = [
 
 export default function BrandsCarousel() {
   return (
-    <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden bg-[#f8f9fa]">
+    <section className="relative py-18 sm:py-22 lg:py-26 overflow-hidden bg-[#f8f9fa]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(155,172,216,0.12),transparent_30%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_5%,rgba(249,133,19,0.12),transparent_28%)]" />
       <motion.div
@@ -22,34 +22,42 @@ export default function BrandsCarousel() {
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
       >
-        <motion.div variants={fadeIn("up")} className="text-center mb-12 space-y-3">
+        <motion.div variants={fadeIn("up")} className="text-center mb-12 space-y-4">
           <div className="pill-badge mx-auto">Nuestras Marcas</div>
           <h2 className="text-3xl md:text-4xl font-bold text-petrol">Marcas que representamos</h2>
           <p className="text-lg text-muted max-w-2xl mx-auto">
             Conectamos empresas globales líderes con oportunidades de crecimiento en América Latina.
           </p>
+          <div className="flex justify-center">
+            <a
+              href="#contacto"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-petrol text-white text-sm font-semibold shadow-[0_10px_30px_-12px_rgba(15,23,42,0.5)] hover:-translate-y-0.5 transition duration-200"
+            >
+              Quiero ser distribuidor
+            </a>
+          </div>
         </motion.div>
 
         <motion.div variants={fadeIn("up", 0.15)} className="relative w-full">
           <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-white via-white/60 to-white/40 blur-3xl" />
-          <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 p-5 rounded-[24px] border border-white/60 bg-white/90 shadow-[0_20px_50px_-22px_rgba(15,23,42,0.35)] backdrop-blur">
+          <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 p-6 rounded-[32px] border border-white/60 bg-white/95 shadow-[0_30px_60px_-30px_rgba(15,23,42,0.45)] backdrop-blur">
             {brands.map((brand, index) => (
               <motion.div
                 key={brand.name}
-                className="group relative flex items-center justify-center rounded-2xl border border-neutral-200/70 bg-gradient-to-br from-white to-[#f8f9fa] px-4 py-3 shadow-soft"
-                whileHover={{ y: -4, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 220, damping: 16 }}
+                className="group relative flex flex-col items-center justify-center rounded-2xl border border-neutral-200/70 bg-gradient-to-br from-white to-[#f8f9fa] px-4 py-4 shadow-[0_14px_40px_-24px_rgba(15,23,42,0.35)]"
+                whileHover={{ y: -6, scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 240, damping: 18 }}
               >
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-electric/10 via-white to-purple-100/30 rounded-2xl" />
                 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="relative z-10 h-14 sm:h-16 object-contain mix-blend-multiply grayscale group-hover:grayscale-0 transition-all duration-300"
+                  className="relative z-10 h-16 sm:h-20 object-contain mix-blend-multiply grayscale group-hover:grayscale-0 transition-all duration-300"
                   onError={(e) => {
                     e.target.style.display = "none";
                   }}
                 />
-                <div className="absolute bottom-2 right-3 text-[10px] font-semibold text-neutral-400 uppercase tracking-wide">
+                <div className="mt-3 text-[11px] font-semibold text-neutral-500 uppercase tracking-[0.18em]">
                   {brand.country}
                 </div>
               </motion.div>
