@@ -26,10 +26,9 @@ export default function WelcomeBanner() {
       ref={ref}
       className="relative py-8 sm:py-12 lg:py-14 overflow-hidden bg-[#f8f9fa]"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,51,130,0.08),transparent_42%)]" />
       <div className="relative w-screen left-1/2 -translate-x-1/2 max-w-none">
         <motion.div
-          className="relative w-full overflow-hidden"
+          className="relative w-full overflow-hidden bg-[#f8f9fa]"
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
