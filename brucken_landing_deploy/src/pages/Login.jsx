@@ -42,8 +42,12 @@ export default function Login() {
 
       if (authError) throw authError;
 
-      // Redirigir a la landing (portal removido)
-      navigate("/");
+      // Asignar rol rápido (admin si el correo contiene "admin")
+      const normalizedEmail = email.toLowerCase();
+      const role = normalizedEmail.includes("admin") ? "admin" : "user";
+      localStorage.setItem("brucken_role", role);
+
+      navigate("/catalog");
     } catch (err) {
       setError(err.message);
     } finally {
