@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/animations";
-import LanguageSwitcher from "./LanguageSwitcher";
 
 const navLinks = [
   { label: "Consultoría", href: "#consultoria" },
@@ -34,7 +33,9 @@ export default function Navbar() {
 
   const linkColor = scrolled ? "text-neutral-700 hover:text-petrol" : "text-white hover:text-white/80";
   const buttonClass = scrolled ? "cta-button cta-primary px-5 py-2 text-sm" : "cta-button cta-primary px-5 py-2 text-sm shadow-glow";
-  const languageVariant = scrolled ? "light" : "dark";
+  const portalLinkClass = scrolled
+    ? "text-[11px] font-semibold tracking-[0.16em] uppercase px-3 py-1.5 rounded-full border border-neutral-300 text-neutral-700 hover:text-petrol hover:border-petrol"
+    : "text-[11px] font-semibold tracking-[0.16em] uppercase px-3 py-1.5 rounded-full border border-white/40 text-white/85 hover:text-white hover:border-white";
   const topClass = scrolled ? "top-0" : "top-3 sm:top-4";
   const logoClass = scrolled
     ? "h-7 w-auto sm:h-8 md:h-9 lg:h-10 brightness-0"
@@ -48,14 +49,6 @@ export default function Navbar() {
       className={`sticky ${topClass} z-50 transition-all duration-300 ${headerClass} ${visible ? "translate-y-0" : "-translate-y-full"}`}
     >
       <nav className="section-container relative flex items-center justify-between py-5 md:py-6 lg:py-7">
-        <a
-          href="/login"
-          className={`hidden lg:block absolute right-0 -top-2 text-[11px] font-semibold tracking-[0.18em] uppercase ${
-            scrolled ? "text-neutral-600 hover:text-petrol" : "text-white/80 hover:text-white"
-          }`}
-        >
-          Portal Distribuidores
-        </a>
         <motion.a
           href="#hero"
           className="flex items-center"
@@ -80,12 +73,17 @@ export default function Navbar() {
             </a>
           ))}
           <a
+            href="/login"
+            className={portalLinkClass}
+          >
+            Portal Distribuidores
+          </a>
+          <a
             href="#contacto"
             className={buttonClass}
           >
             Agenda una reunión
           </a>
-          <LanguageSwitcher variant={languageVariant} />
         </div>
 
         <button
@@ -122,11 +120,11 @@ export default function Navbar() {
             className="lg:hidden border-t border-neutral-200 bg-white/95 backdrop-blur"
           >
             <motion.ul
-              variants={fadeIn("up", 0.1)}
-              className="flex flex-col py-5 px-6 gap-3 text-neutral-800"
-            >
-              {navLinks.map((link) => (
-                <li key={link.label}>
+            variants={fadeIn("up", 0.1)}
+            className="flex flex-col py-5 px-6 gap-3 text-neutral-800"
+          >
+            {navLinks.map((link) => (
+              <li key={link.label}>
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
@@ -136,14 +134,11 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
-              <li className="pt-2">
-                <LanguageSwitcher variant="light" />
-              </li>
               <li>
                 <a
                   href="/login"
                   onClick={() => setOpen(false)}
-                  className="text-base font-semibold text-petrol"
+                  className="text-sm font-semibold uppercase tracking-[0.14em] text-petrol"
                 >
                   Portal Distribuidores
                 </a>
