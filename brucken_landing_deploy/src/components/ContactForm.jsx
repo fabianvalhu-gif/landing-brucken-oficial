@@ -112,7 +112,7 @@ export default function ContactForm() {
           className="glass-card p-6 sm:p-8 space-y-4"
         >
           {["name", "email", "company"].map((field) => (
-            <div key={field} className "flex flex-col gap-1">
+            <div key={field} className="flex flex-col gap-1">
               <label htmlFor={field} className="text-sm text-neutral-700 font-semibold">
                 {fieldLabels[field]}
               </label>
