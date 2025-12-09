@@ -34,6 +34,7 @@ export default function Navbar() {
 
   const linkColor = scrolled ? "text-neutral-700 hover:text-petrol" : "text-white hover:text-white/80";
   const buttonClass = scrolled ? "cta-button cta-primary px-5 py-2 text-sm" : "cta-button cta-primary px-5 py-2 text-sm shadow-glow";
+  const portalButtonClass = scrolled ? "cta-button cta-secondary px-5 py-2 text-sm" : "cta-button cta-secondary px-5 py-2 text-sm shadow-glow";
   const languageVariant = scrolled ? "light" : "dark";
   const topClass = scrolled ? "top-0" : "top-3 sm:top-4";
   const logoClass = scrolled
@@ -71,6 +72,12 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <a
+            href="/login"
+            className={portalButtonClass}
+          >
+            Portal Distribuidores
+          </a>
           <a
             href="#contacto"
             className={buttonClass}
@@ -130,6 +137,15 @@ export default function Navbar() {
               ))}
               <li className="pt-2">
                 <LanguageSwitcher variant="light" />
+              </li>
+              <li>
+                <a
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="cta-button cta-secondary w-full justify-center"
+                >
+                  Portal Distribuidores
+                </a>
               </li>
               <li>
                 <a
