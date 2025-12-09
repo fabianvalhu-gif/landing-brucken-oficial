@@ -36,15 +36,14 @@ export default function WelcomeBanner() {
           <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white via-white/70 to-transparent z-10" />
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white via-white/70 to-transparent z-10" />
 
-          <div className="relative w-full bg-gradient-to-b from-white to-[#f8f9fb]">
+          <div className="relative w-full bg-transparent">
             <div className="aspect-[16/6] sm:aspect-[16/5] lg:aspect-[16/4.5] w-full">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={slides[index].src}
                   src={slides[index].src}
                   alt={slides[index].alt}
-                  className="w-full h-full object-contain sm:object-cover block"
-                  style={{ mixBlendMode: "multiply" }}
+                  className="w-full h-full object-contain block"
                   loading="lazy"
                   initial={{ opacity: 0, x: 40 }}
                   animate={{ opacity: 1, x: 0 }}
