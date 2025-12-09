@@ -6,6 +6,7 @@ const initialForm = {
   name: "",
   email: "",
   phone: "",
+  country: "CL",
   company: "",
   message: "",
 };
@@ -90,7 +91,7 @@ export default function ContactForm() {
             Diseñemos juntos la próxima fase de tu crecimiento.
           </h2>
           <p className="text-lg text-muted">
-            Cuéntanos tus objetivos, dolores actuales o iniciativas pendientes. Respondemos en menos de 24 horas para
+            Cuéntanos tus objetivos, puntos de mejora o iniciativas pendientes. Respondemos en menos de 24 horas para
             agendar una reunión ejecutiva.
           </p>
           <div className="space-y-2 text-neutral-700">
@@ -110,8 +111,8 @@ export default function ContactForm() {
           onSubmit={handleSubmit}
           className="glass-card p-6 sm:p-8 space-y-4"
         >
-          {["name", "email", "phone", "company"].map((field) => (
-            <div key={field} className="flex flex-col gap-1">
+          {["name", "email", "company"].map((field) => (
+            <div key={field} className "flex flex-col gap-1">
               <label htmlFor={field} className="text-sm text-neutral-700 font-semibold">
                 {fieldLabels[field]}
               </label>
@@ -127,6 +128,45 @@ export default function ContactForm() {
               {errors[field] && <span className="text-xs text-red-500">{errors[field]}</span>}
             </div>
           ))}
+
+          {/* Teléfono con selector de país */}
+          <div className="flex flex-col gap-1">
+            <label htmlFor="phone" className="text-sm text-neutral-700 font-semibold">
+              {fieldLabels.phone}
+            </label>
+            <div className="grid grid-cols-[1.2fr_2.4fr] gap-2">
+              <select
+                name="country"
+                id="country"
+                className="bg-white border border-neutral-200 rounded-xl px-3 py-3 text-neutral-800 focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/30"
+                value={formData.country}
+                onChange={handleChange}
+              >
+                {[
+                  { code: "CL", dial: "+56", label: "Chile", flag: "🇨🇱" },
+                  { code: "AR", dial: "+54", label: "Argentina", flag: "🇦🇷" },
+                  { code: "MX", dial: "+52", label: "México", flag: "🇲🇽" },
+                  { code: "US", dial: "+1", label: "USA", flag: "🇺🇸" },
+                  { code: "ES", dial: "+34", label: "España", flag: "🇪🇸" },
+                  { code: "BR", dial: "+55", label: "Brasil", flag: "🇧🇷" },
+                ].map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.flag} {c.label} ({c.dial})
+                  </option>
+                ))}
+              </select>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                className="bg-white border border-neutral-200 rounded-xl px-4 py-3 text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/30"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder={placeholders.phone}
+              />
+            </div>
+            {errors.phone && <span className="text-xs text-red-500">{errors.phone}</span>}
+          </div>
 
           <div className="flex flex-col gap-1">
             <label htmlFor="message" className="text-sm text-neutral-700 font-semibold">
