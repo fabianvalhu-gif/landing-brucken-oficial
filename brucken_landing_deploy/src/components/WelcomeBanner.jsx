@@ -22,7 +22,10 @@ export default function WelcomeBanner() {
   const goTo = (i) => setIndex(i % slides.length);
 
   return (
-    <section ref={ref} className="relative py-10 sm:py-14 lg:py-16 overflow-hidden">
+    <section
+      ref={ref}
+      className="relative py-10 sm:py-14 lg:py-16 overflow-hidden bg-[#f8f9fa]"
+    >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(155,172,216,0.12),transparent_30%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(34,51,130,0.12),transparent_26%)]" />
       <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen">
