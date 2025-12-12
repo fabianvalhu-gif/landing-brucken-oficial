@@ -9,7 +9,6 @@ import WelcomeBanner from "../components/WelcomeBanner";
 import PodcastSection from "../components/PodcastSection";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
-import AboutUs from "../components/AboutUs";
 import MarketingConsulting from "../components/MarketingConsulting";
 
 export default function Home() {
@@ -20,7 +19,6 @@ export default function Home() {
         <Navbar />
         <main>
           <Hero />
-          <AboutUs />
           <ValueProposition />
           <Services />
           <MarketingConsulting />
