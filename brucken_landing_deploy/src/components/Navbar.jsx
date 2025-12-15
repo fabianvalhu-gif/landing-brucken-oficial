@@ -6,7 +6,6 @@ const navLinks = [
   { label: "Consultoría", href: "#consultoria" },
   { label: "Software Factory", href: "#software" },
   { label: "Representación Comercial", href: "#representacion" },
-  { label: "Podcast", href: "#podcast" },
   { label: "Contacto", href: "#contacto" },
 ];
 

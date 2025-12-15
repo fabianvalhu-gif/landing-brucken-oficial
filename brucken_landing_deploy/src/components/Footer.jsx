@@ -46,7 +46,6 @@ export default function Footer() {
               <li><a href="#software" className="hover:text-electric transition-colors">Software Factory</a></li>
               <li><a href="#representacion" className="hover:text-electric transition-colors">Representación Comercial</a></li>
               <li><a href="#proyectos" className="hover:text-electric transition-colors">Proyectos</a></li>
-              <li><a href="#podcast" className="hover:text-electric transition-colors">Podcast El Salto</a></li>
             </ul>
           </div>
 
