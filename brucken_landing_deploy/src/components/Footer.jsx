@@ -71,7 +71,6 @@ export default function Footer() {
               ))}
             </div>
             <p className="text-sm text-neutral-600">sales@bruckenglobal.com</p>
-            <p className="text-sm text-neutral-600">14 Norte 976, Viña del Mar, Chile</p>
           </div>
         </div>
 

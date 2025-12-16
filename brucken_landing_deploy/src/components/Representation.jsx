@@ -42,7 +42,7 @@ const steps = [
 ];
 
 const trust = [
-  { label: "Marcas representadas", value: "6" },
+  { label: "Marcas representadas", value: "5" },
   { label: "Países", value: "+7" },
   { label: "Clientes", value: "+500" },
   { label: "Retención", value: "90%" },

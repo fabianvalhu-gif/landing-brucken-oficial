@@ -7,7 +7,6 @@ const brands = [
   { name: "Logmasters", logo: "/logos/3.png", country: "CHILE" },
   { name: "SMZ", logo: "/logos/4.png", country: "CHINA" },
   { name: "Helios", logo: "/logos/5.png", country: "CHINA" },
-  { name: "Atlas", logo: "/logos/6.png", country: "CHINA" },
 ];
 
 export default function BrandsCarousel() {
@@ -40,7 +39,7 @@ export default function BrandsCarousel() {
 
         <motion.div variants={fadeIn("up", 0.15)} className="relative w-full">
           <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-white via-white/60 to-white/40 blur-3xl" />
-          <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 p-6 rounded-[32px] border border-white/60 bg-white/95 shadow-[0_30px_60px_-30px_rgba(15,23,42,0.45)] backdrop-blur">
+          <div className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 p-6 rounded-[32px] border border-white/60 bg-white/95 shadow-[0_30px_60px_-30px_rgba(15,23,42,0.45)] backdrop-blur">
             {brands.map((brand, index) => (
               <motion.div
                 key={brand.name}
@@ -70,7 +69,7 @@ export default function BrandsCarousel() {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12"
         >
             {[
-              { value: "6", label: "Marcas representadas" },
+              { value: "5", label: "Marcas representadas" },
               { value: "+7", label: "Países" },
               { value: "+500", label: "Clientes" },
               { value: "90%", label: "Retención" },
