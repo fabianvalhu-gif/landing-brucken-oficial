@@ -97,7 +97,6 @@ export default function ContactForm() {
           <div className="space-y-2 text-neutral-700">
             <p>📧 sales@bruckenglobal.com</p>
             <p>🌐 www.bruckenglobal.com</p>
-            <p>📍 14 Norte 976, Viña del Mar, Chile</p>
           </div>
           <div className="flex gap-2 flex-wrap">
             <span className="px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 text-sm font-semibold">Respuesta en 24h</span>
